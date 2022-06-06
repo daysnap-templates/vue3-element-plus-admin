@@ -1,6 +1,8 @@
 
 <template>
-  <p>home</p>
+  <div class="ds-tags">
+    ds-tags
+  </div>
 </template>
 
 <script lang="ts">

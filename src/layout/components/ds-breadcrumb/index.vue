@@ -1,6 +1,8 @@
 
 <template>
-  <p>home</p>
+  <div class="ds-slidebar">
+
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,0 +1,46 @@
+
+@import "src/assets/scss/define";
+
+$namespace: 'ds';
+
+@include b(layout) {
+  @extend %h100;
+  @extend %w100;
+  background-color: #f2f2f2;
+
+  @include e(inner) {
+
+  }
+
+  @include e(header) {
+
+  }
+
+  @include e(main) {
+    background-color: red;
+  }
+}
+
+@include b(slidebar) {
+  @extend %h100;
+  width: 210px;
+  background-color: #ddd;
+
+  @include e(logo) {
+    height: 50px;
+    background-color: #42b983;
+  }
+
+}
+
+
+@include b(navbar) {
+  background-color: #aaa;
+  height: 50px;
+}
+
+@include b(tags) {
+  height: 20px;
+  background-color: #304455;
+}
+
