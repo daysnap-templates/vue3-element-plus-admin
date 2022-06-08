@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 /// <reference types="unplugin-vue-define-options" />
-import 'vue-router'
+import { RouteMeta, _RouteRecordBase } from 'vue-router'
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
@@ -10,6 +10,9 @@ declare module '*.vue' {
 }
 
 declare module 'vue-router' {
+  interface _RouteRecordBase {
+    hidden?: boolean
+  }
   interface RouteMeta {
     title?: string
     icon?: string

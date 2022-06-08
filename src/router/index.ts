@@ -17,34 +17,20 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: '/test1',
+    path: '/menu',
     component: Layout,
+    redirect: '/menu/menu1',
+    meta: { title: '菜单', icon: 'home' },
     children: [
       {
-        path: 'test-a',
-        component: () => import('src/views/test1/testa.vue'),
-        meta: { title: 'TEST1-A', icon: 'home' },
+        path: 'menu1',
+        component: () => import('src/views/menu/menu1.vue'),
+        meta: { title: '菜单1', icon: 'home' },
       },
       {
-        path: 'test-b',
-        component: () => import('src/views/test1/testb.vue'),
-        meta: { title: 'TEST1-B', icon: 'home' },
-      },
-    ]
-  },
-  {
-    path: '/test2',
-    component: Layout,
-    children: [
-      {
-        path: 'test-a',
-        component: () => import('src/views/test2/testa.vue'),
-        meta: { title: 'TEST2-A', icon: 'home' },
-      },
-      {
-        path: 'test-b',
-        component: () => import('src/views/test2/testb.vue'),
-        meta: { title: 'TEST2-B', icon: 'home' },
+        path: 'menu2',
+        component: () => import('src/views/menu/menu2.vue'),
+        meta: { title: '菜单2', icon: 'home' },
       },
     ]
   },
