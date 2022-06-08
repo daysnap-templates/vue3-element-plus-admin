@@ -1,8 +1,10 @@
 
 <template>
-  <p>home</p>
+  <p @click="setCollapse(!collapse)">home</p>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+  import { useCollapse } from 'src/layout/hooks'
 
+  const [ collapse, setCollapse ] = useCollapse()
 </script>

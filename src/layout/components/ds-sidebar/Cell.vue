@@ -1,41 +1,40 @@
 
 <template>
-  <div class="ds-slidebar-item">
-    <ds-sidebar-link
-      :to="resolvePath(computedChild.path)"
-      v-if="computedChild && computedChild.meta">
-      <el-menu-item
-        :index="resolvePath(computedChild.path)"
-      >
-        <ds-sidebar-item
-          :icon="computedChild.meta.icon"
-          :title="computedChild.meta.title"
-        />
-      </el-menu-item>
-    </ds-sidebar-link>
-    <el-sub-menu
-      v-else
-      :index="resolvePath(item.path)"
-      popper-append-to-body
+  <ds-sidebar-link
+    :to="resolvePath(computedChild.path)"
+    v-if="computedChild && computedChild.meta">
+    <el-menu-item
+      :index="resolvePath(computedChild.path)"
     >
-      <template #title>
-        <ds-sidebar-item
-          v-if="item.meta"
-          :icon="item.meta.icon"
-          :title="item.meta.title"
-        />
-      </template>
-      <ds-sidebar-cell
-        v-for="child in item.children"
-        :key="child.path"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-      ></ds-sidebar-cell>
-    </el-sub-menu>
-  </div>
+      <ds-sidebar-item
+        :icon="computedChild.meta.icon"
+        :title="computedChild.meta.title"
+      />
+    </el-menu-item>
+  </ds-sidebar-link>
+  <el-sub-menu
+    v-else
+    :index="resolvePath(item.path)"
+    popper-append-to-body
+  >
+    <template #title>
+      <ds-sidebar-item
+        v-if="item.meta"
+        :icon="item.meta.icon"
+        :title="item.meta.title"
+      />
+    </template>
+    <ds-sidebar-cell
+      v-for="child in item.children"
+      :key="child.path"
+      :item="child"
+      :base-path="resolvePath(child.path)"
+    ></ds-sidebar-cell>
+  </el-sub-menu>
 </template>
 
 <script setup lang="ts">
+
   import { resolve } from 'src/layout/utils/resolve'
   import { RouteRecordRaw } from 'vue-router'
   import { isExternal } from 'src/layout/utils/helper'
@@ -82,6 +81,5 @@
     }
     return child
   })
-
 
 </script>

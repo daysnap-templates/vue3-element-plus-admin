@@ -27,8 +27,22 @@ $namespace: 'ds';
   background-color: #ddd;
 
   @include e(logo) {
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
     height: 50px;
-    background-color: #42b983;
+    img{
+      width: 32px;
+      height: 32px;
+    }
+
+    @include when(collapse) {
+
+    }
+
+    @include when(expand) {
+
+    }
   }
 
 }
