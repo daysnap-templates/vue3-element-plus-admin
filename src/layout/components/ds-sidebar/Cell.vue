@@ -15,6 +15,7 @@
     </ds-sidebar-link>
     <el-sub-menu
       v-else
+      :index="resolvePath(item.path)"
       popper-append-to-body
     >
       <template #title>
@@ -60,9 +61,6 @@
     if (isExternal(basePath)) {
       return basePath
     }
-    console.log('basePath => ', basePath)
-    console.log('routePath => ', routePath)
-    console.log('resolvePath => ', resolve(basePath, routePath))
     return resolve(basePath, routePath)
   }
 

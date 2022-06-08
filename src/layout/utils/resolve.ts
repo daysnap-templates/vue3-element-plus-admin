@@ -1,4 +1,6 @@
 
+// 由 path-browserify.js 提取
+
 function normalizeStringPosix(path: string, allowAboveRoot: boolean) {
   let res = '';
   let lastSegmentLength = 0;

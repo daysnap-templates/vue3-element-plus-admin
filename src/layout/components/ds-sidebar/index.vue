@@ -22,12 +22,12 @@
 <script setup lang="ts">
   import DsLogo from './Logo.vue'
   import DsSidebarCell from './Cell.vue'
+
   const routes = useRouter().options.routes
-  console.log('routes => ', routes)
+
   const computedActiveMenu = computed(() => {
     const route = useRoute()
-    // const { mata, path } = route
-    // console.log('111 => ', route.path)
-    return route.path
+    const { meta, path } = route
+    return meta?.activeMenu?? path
   })
 </script>
