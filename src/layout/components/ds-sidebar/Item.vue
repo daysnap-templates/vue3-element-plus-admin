@@ -1,51 +1,12 @@
 
 <template>
-  <div class="ds-slidebar-item">
-    <el-sub-menu
-      popper-append-to-body
-    >
-      <template #title>
-<!--        <span>{{ item.meta?.title ?? '123213' }}</span>-->
-        <span>{{ resolvePath(item.path) }}</span>
-      </template>
-      <ds-sidebar-item
-        v-for="child in item.children"
-        :index="resolvePath(item.path)"
-        :key="child.path"
-        :item="child"
-        :base-path="child.path"
-      ></ds-sidebar-item>
-    </el-sub-menu>
-  </div>
+  <el-icon></el-icon>
+  <span slot="title">{{ title }}</span>
 </template>
 
 <script setup lang="ts">
-  import { RouteRecordRaw } from 'vue-router'
-  import { isExternal } from 'src/layout/utils/helper'
-
-  defineOptions({
-    name: 'ds-sidebar-item'
-  })
-
-  const {
-    basePath = '',
-    item
-  } = defineProps<{
-    item: RouteRecordRaw,
-    basePath?: string,
+  defineProps<{
+    icon?: string,
+    title?: string,
   }>()
-
-  const resolvePath = (routePath: string) => {
-    if (isExternal(routePath)) {
-      return routePath
-    }
-    if (isExternal(basePath)) {
-      return basePath
-    }
-    return `${basePath}${routePath}`
-  }
-
-  const hasOneShowingChild = computed(() => {
-    const { children = [] } = item
-  })
 </script>

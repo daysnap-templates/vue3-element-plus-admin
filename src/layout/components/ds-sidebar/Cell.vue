@@ -1,36 +1,45 @@
 
 <template>
   <div class="ds-slidebar-item">
-
-    <ds-sidebar-link>
+    <ds-sidebar-link
+      :to="resolvePath(computedChild.path)"
+      v-if="computedChild && computedChild.meta">
       <el-menu-item
-        :index="resolvePath()"
+        :index="resolvePath(computedChild.path)"
       >
+        <ds-sidebar-item
+          :icon="computedChild.meta.icon"
+          :title="computedChild.meta.title"
+        />
       </el-menu-item>
     </ds-sidebar-link>
-
     <el-sub-menu
+      v-else
       popper-append-to-body
     >
       <template #title>
-<!--        <span>{{ item.meta?.title ?? '123213' }}</span>-->
-        <span>{{ resolvePath(item.path) }}</span>
+        <ds-sidebar-item
+          v-if="item.meta"
+          :icon="item.meta.icon"
+          :title="item.meta.title"
+        />
       </template>
       <ds-sidebar-cell
         v-for="child in item.children"
-        :index="resolvePath(item.path)"
         :key="child.path"
         :item="child"
-        :base-path="child.path"
+        :base-path="resolvePath(child.path)"
       ></ds-sidebar-cell>
     </el-sub-menu>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { resolve } from 'src/layout/utils/resolve'
   import { RouteRecordRaw } from 'vue-router'
   import { isExternal } from 'src/layout/utils/helper'
   import DsSidebarLink from './Link.vue'
+  import DsSidebarItem from './Item.vue'
 
   defineOptions({
     name: 'ds-sidebar-cell'
@@ -51,17 +60,28 @@
     if (isExternal(basePath)) {
       return basePath
     }
-    return `${basePath}${routePath}`
+    console.log('basePath => ', basePath)
+    console.log('routePath => ', routePath)
+    console.log('resolvePath => ', resolve(basePath, routePath))
+    return resolve(basePath, routePath)
   }
 
-  const hasOneShowingChild = computed(() => {
+  const computedChild = computed(() => {
     const { children = [] } = item
-    const child = null
+    let child = null
     const showingChildren = children.filter(item => {
       if (item.hidden) {
-
+        return false
+      } else {
+        child = item
+        return true
       }
     })
+    if (showingChildren.length === 0) {
+      child = { ...item, path: '' }
+    } else if (showingChildren.length > 1) {
+      child = ''
+    }
     return child
   })
 

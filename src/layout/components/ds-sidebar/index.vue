@@ -27,7 +27,7 @@
   const computedActiveMenu = computed(() => {
     const route = useRoute()
     // const { mata, path } = route
-    console.log('111 => ', route.path)
+    // console.log('111 => ', route.path)
     return route.path
   })
 </script>
