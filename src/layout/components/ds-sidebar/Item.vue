@@ -1,6 +1,6 @@
 
 <template>
-  <el-icon></el-icon>
+  <el-icon><Basketball /></el-icon>
   <span slot="title">{{ title }}</span>
 </template>
 

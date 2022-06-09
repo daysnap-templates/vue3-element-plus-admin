@@ -27,24 +27,51 @@ $namespace: 'ds';
   background-color: #ddd;
 
   @include e(logo) {
-    @extend %df;
-    @extend %aic;
-    @extend %jcc;
+    @extend %pr;
+    @extend %oh;
+    @extend %w100;
     height: 50px;
     img{
       width: 32px;
       height: 32px;
     }
 
-    @include when(collapse) {
+    a {
+      @extend %df;
+      @extend %aic;
+      @extend %jcc;
+      @extend %h100;
+      @extend %pr;
+      @extend %w100;
 
+      @include when(collapse) {
+        h1{
+          @extend %pa;
+          font-size: 0;
+          width: 0;
+          height: 0;
+          text-indent: 200px;
+        }
+      }
+
+      @include when(expand) {
+      }
     }
 
-    @include when(expand) {
-
-    }
   }
 
+}
+
+@include b(slidebar-logo-fade) {
+  @include e(enter-active) {
+    transition: opacity .5s;
+  }
+  @include e(enter-from) {
+    opacity: 0;
+  }
+  @include e(leave-to) {
+    opacity: 0;
+  }
 }
 
 
@@ -57,4 +84,6 @@ $namespace: 'ds';
   height: 20px;
   background-color: #304455;
 }
+
+
 

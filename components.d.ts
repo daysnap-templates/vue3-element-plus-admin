@@ -12,6 +12,9 @@ declare module '@vue/runtime-core' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    IEpAddLocation: typeof import('~icons/ep/add-location')['default']
+    IEpApple: typeof import('~icons/ep/apple')['default']
+    IEpClose: typeof import('~icons/ep/close')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

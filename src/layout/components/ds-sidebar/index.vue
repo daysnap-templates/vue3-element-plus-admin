@@ -8,6 +8,7 @@
     <el-scrollbar>
       <el-menu
         mode="vertical"
+        :collapse="collapse"
         :unique-opened="false"
         :default-active="computedActiveMenu"
       >
@@ -30,8 +31,6 @@
 
   const routes = useRouter().options.routes
   const [ collapse, setCollapse ] = useCollapse()
-
-  const d = () => console.log('1')
 
   const computedActiveMenu = computed(() => {
     const route = useRoute()
