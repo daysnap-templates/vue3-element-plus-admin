@@ -32,7 +32,3 @@
   })
 
 </script>
-
-<style lang="scss" scoped>
-  @import "src/layout/styles/index";
-</style>
