@@ -6,10 +6,8 @@
     <el-menu-item
       :index="resolvePath(computedChild.path)"
     >
-      <ds-sidebar-item
-        :icon="computedChild.meta.icon"
-        :title="computedChild.meta.title"
-      />
+      <el-icon><Basketball/></el-icon>
+      <template #title>{{ computedChild.meta.title }}</template>
     </el-menu-item>
   </ds-sidebar-link>
   <el-sub-menu
@@ -18,11 +16,8 @@
     popper-append-to-body
   >
     <template #title>
-      <ds-sidebar-item
-        v-if="item.meta"
-        :icon="item.meta.icon"
-        :title="item.meta.title"
-      />
+        <el-icon><Basketball/></el-icon>
+        <span>{{ item.meta.title }}</span>
     </template>
     <ds-sidebar-cell
       v-for="child in item.children"
@@ -39,7 +34,6 @@
   import { RouteRecordRaw } from 'vue-router'
   import { isExternal } from 'src/layout/utils/helper'
   import DsSidebarLink from './Link.vue'
-  import DsSidebarItem from './Item.vue'
 
   defineOptions({
     name: 'ds-sidebar-cell'

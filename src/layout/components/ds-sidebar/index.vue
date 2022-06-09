@@ -6,6 +6,7 @@
       :collapse="collapse"
     />
     <el-scrollbar>
+      <p @click="setCollapse(!collapse)">ddsadad</p>
       <el-menu
         mode="vertical"
         :collapse="collapse"
