@@ -6,21 +6,41 @@
       name="ds-bread-crumb">
       <el-breadcrumb-item
         class="ds-bread-crumb-item"
+        :class="{
+          'is-no-redirect': computedList.length - 1 === index
+        }"
         v-for="(item, index) in computedList"
         :key="item.path + index"
+        @click="handleLink(item, computedList.length - 1 === index)"
       >
-        <span>{{ item.meta.title }}</span>
+        {{ item.meta.title }}
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
 </template>
 
 <script setup lang="ts">
+  import * as ptr from 'path-to-regexp'
+  import { RouteLocationMatched, RouteLocationRaw } from 'vue-router'
 
+  const route = useRoute()
   const computedList = computed(() => {
-    const route = useRoute()
     return route.matched.filter(item => item.meta && item.meta.title)
   })
+
+  const router = useRouter()
+  const handleLink = (item: RouteLocationMatched, disabled: boolean) => {
+    if (disabled) {
+      return
+    }
+    const { redirect, path } = item
+    if (redirect) {
+      return router.push(redirect as RouteLocationRaw)
+    }
+    const { params } = route
+    const to = ptr.compile(path)(params)
+    router.push(to)
+  }
 
 </script>
 

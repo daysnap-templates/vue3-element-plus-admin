@@ -11,6 +11,8 @@
     "@daysnap/define-sass": "0.0.9",
     "@element-plus/icons-vue": "^2.0.4",
     "element-plus": "^2.2.4",
+    "path-to-regexp": "^6.2.1",
+    "screenfull": "^6.0.1",
     "vue": "^3.2.25",
     "vue-router": "^4.0.15"
   },

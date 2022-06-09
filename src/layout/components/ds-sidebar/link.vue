@@ -8,7 +8,13 @@
 </template>
 
 <script setup lang="ts">
+
   import { isExternal } from 'src/layout/utils/helper'
+
+  defineOptions({
+    name: 'ds-sidebar-link'
+  })
+
   const { to } = defineProps<{
     to: string
   }>()
@@ -18,4 +24,5 @@
       ? { is: `a`, href: to, target: '_blank', rel: 'noopener' }
       : { is: 'router-link', to }
   })
+
 </script>
