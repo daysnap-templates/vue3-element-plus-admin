@@ -1,21 +1,25 @@
 
 <template>
-  <ds-sidebar-link
-    :to="resolvePath(computedChild.path)"
-    v-if="computedChild && computedChild.meta">
-    <el-menu-item
-      :index="resolvePath(computedChild.path)"
-    >
-      <el-icon><Basketball/></el-icon>
-      <template #title>{{ computedChild.meta.title }}</template>
-    </el-menu-item>
-  </ds-sidebar-link>
+  <template v-if="computedChild">
+    <ds-sidebar-link
+      :to="resolvePath(computedChild.path)"
+      v-if="computedChild.meta">
+      <el-menu-item
+        :index="resolvePath(computedChild.path)"
+      >
+        <el-icon><Basketball/></el-icon>
+        <template #title>
+          {{ computedChild.meta.title }}
+        </template>
+      </el-menu-item>
+    </ds-sidebar-link>
+  </template>
   <el-sub-menu
     v-else
     :index="resolvePath(item.path)"
     popper-append-to-body
   >
-    <template #title>
+    <template #title v-if="item.meta">
         <el-icon><Basketball/></el-icon>
         <span>{{ item.meta.title }}</span>
     </template>
@@ -33,7 +37,7 @@
   import { resolve } from 'src/layout/utils/resolve'
   import { RouteRecordRaw } from 'vue-router'
   import { isExternal } from 'src/layout/utils/helper'
-  import DsSidebarLink from './Link.vue'
+  import DsSidebarLink from './link.vue'
 
   defineOptions({
     name: 'ds-sidebar-cell'
@@ -73,7 +77,9 @@
     } else if (showingChildren.length > 1) {
       child = ''
     }
+
     return child
   })
+
 
 </script>
