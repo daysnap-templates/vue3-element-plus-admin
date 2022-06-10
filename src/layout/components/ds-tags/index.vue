@@ -6,16 +6,16 @@
       closable
       class="ds-tags-tabs"
     >
-      <el-tab-pane
+      <div
         v-for="(item, index) in 3"
-        :key="index"
-        label="哈哈"
-        :name="item.path"
-      >
-        <template #label >
-          <span @contextmenu.prevent="handleContextmenu(item, $event)">123123313</span>
-        </template>
-      </el-tab-pane>
+        @contextmenu.prevent.capture="handleContextmenu(item, $event)"
+        :key="index">
+        <el-tab-pane
+          label="哈哈"
+          :name="item.path"
+        >
+        </el-tab-pane>
+      </div>
     </el-tabs>
     <ul
       class="ds-tags-contextmenu"
@@ -56,13 +56,15 @@
 
 </script>
 
-<style lang="scss">
+<style></style>
+
+<style lang="scss" scoped>
   @import "src/layout/styles/index";
 
   @include b(tags) {
     @extend %pr;
     background-color: #fff;
-    .el-tabs__header{
+    :deep .el-tabs__header{
       margin-bottom: 0;
     }
 
