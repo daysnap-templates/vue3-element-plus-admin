@@ -1,16 +1,15 @@
 
 <template>
-  <el-icon
-    size="20"
+  <ds-svg-icon
     @click="handleToggle"
-  >
-    <FullScreen />
-  </el-icon>
+    icon="FullScreen"
+  />
 </template>
 
 <script setup lang="ts">
 
   import screenfull from 'screenfull'
+  import DsSvgIcon from 'src/layout/components/ds-svg-icon/index.vue'
 
   const isFullscreen = ref<boolean>(false)
   const changeHandle = () => {

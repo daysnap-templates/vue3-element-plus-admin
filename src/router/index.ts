@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'home',
         component: () => import('src/views/home/index.vue'),
-        meta: { title: '首页', icon: 'home' }
+        meta: { title: '首页', icon: 'HomeFilled' }
       }
     ]
   },
@@ -19,17 +19,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/menu',
     component: Layout,
     redirect: '/menu/menu1',
-    meta: { title: '菜单', icon: 'home' },
+    meta: { title: '菜单', icon: 'Basketball' },
     children: [
       {
         path: 'menu1',
         component: () => import('src/views/menu/menu1.vue'),
-        meta: { title: '菜单1', icon: 'home' },
+        meta: { title: '菜单1', icon: 'Basketball' },
       },
       {
         path: 'menu2',
         component: () => import('src/views/menu/menu2.vue'),
-        meta: { title: '菜单2', icon: 'home' },
+        meta: { title: '菜单2', icon: 'Basketball' },
       },
     ]
   },

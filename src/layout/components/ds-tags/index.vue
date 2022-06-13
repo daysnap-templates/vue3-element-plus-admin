@@ -102,9 +102,39 @@
 
   @include b(tags) {
     @extend %pr;
+    border-top: 1px solid #f6f6f6;
+    padding: 0 10px;
 
-    :deep .el-tabs__header{
-      margin-bottom: 0;
+    :deep {
+      .el-tabs__header{
+        margin-bottom: 0;
+      }
+      .el-tabs__nav{
+        border: none;
+      }
+      .el-tabs__item{
+        height: 38px;
+        padding: 0 30px 0 30px;
+        margin-top: 5.95px;
+        margin-right: -18px;
+        line-height: 38px;
+        text-align: center;
+        border: 0;
+        outline: none;
+        transition: padding .3s cubic-bezier(.645,.045,.355,1)!important;
+
+        &.is-active {
+          color: var(--el-color-primary) !important;
+          background: var(--el-color-primary-light-9) !important;
+          padding: 0 30px 0 30px;
+          color: var(--el-color-primary);
+          background: var(--el-color-primary-light-9);
+          -webkit-mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
+          mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+        }
+      }
     }
 
     @include e(contextmenu) {
@@ -114,12 +144,12 @@
       font-size: 12px;
       border-radius: 4px;
       background-color: #fff;
-      z-index: 3000;
+      z-index: 99;
       box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
       li{
+        @extend %cp;
         margin: 0;
         padding: 7px 16px;
-        cursor: pointer;
         &:hover {
           background-color: #eee;
         }

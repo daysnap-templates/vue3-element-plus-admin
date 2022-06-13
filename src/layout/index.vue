@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+
   import DsSidebar from './components/ds-sidebar/index.vue'
   import DsNavbar from './components/ds-navbar/index.vue'
   import DsTags from './components/ds-tags/index.vue'
@@ -51,6 +52,8 @@
 
     @include e(inner) {
       @extend %df1;
+      @extend %pr;
+      @extend %h100;
     }
 
     @include e(mask) {
@@ -61,15 +64,22 @@
       @extend %l0;
       @extend %dn;
       background-color: rgb(0, 0, 0, .3);
-      z-index: 9;
+      z-index: 99;
     }
 
     @include e(header) {
-
+      @extend %pa;
+      @extend %t0;
+      @extend %l0;
+      @extend %r0;
+      z-index: 9;
+      box-shadow: 0 1px 4px rgb(0, 21, 41, .08);
     }
 
     @include e(main) {
-
+      @extend %bsb;
+      @extend %oya;
+      @extend %h100;
     }
 
     @include when(mobile) {
@@ -77,7 +87,7 @@
         @extend %pf;
         @extend %t0;
         @extend %l0;
-        z-index: 9;
+        z-index: 99;
         @include when(collapse) {
           width: 210px;
         }

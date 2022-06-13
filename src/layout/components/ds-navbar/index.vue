@@ -1,12 +1,17 @@
 
 <template>
   <div class="ds-navbar">
+
     <ds-hamburger/>
+
     <ds-bread-crumb/>
+
     <div class="ds-navbar-right">
+
       <el-tooltip content="全屏">
         <ds-screen-full/>
       </el-tooltip>
+
       <el-dropdown
         class="ds-user"
         trigger="hover">
@@ -20,7 +25,9 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+
     </div>
+
   </div>
 </template>
 
