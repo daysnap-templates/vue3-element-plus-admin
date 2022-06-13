@@ -50,7 +50,6 @@
   @import "src/layout/styles/define";
 
   @include b(bread-crumb) {
-    background-color: #fff;
 
     @include e(item) {
       @extend %dib;

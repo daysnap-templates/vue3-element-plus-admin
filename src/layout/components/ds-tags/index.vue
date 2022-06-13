@@ -102,7 +102,7 @@
 
   @include b(tags) {
     @extend %pr;
-    background-color: #fff;
+
     :deep .el-tabs__header{
       margin-bottom: 0;
     }
@@ -121,7 +121,7 @@
         padding: 7px 16px;
         cursor: pointer;
         &:hover {
-          background: #eee;
+          background-color: #eee;
         }
       }
     }
