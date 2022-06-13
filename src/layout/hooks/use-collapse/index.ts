@@ -1,5 +1,5 @@
 
-import { Ref } from "vue"
+import { Ref } from 'vue'
 
 const collapse = ref<boolean>(false)
 
@@ -9,5 +9,5 @@ export const useCollapse = (value?: boolean): [Ref<boolean>, typeof setCollapse]
   if (typeof value !== 'undefined') {
     setCollapse(value)
   }
-  return [ readonly(collapse), setCollapse ]
+  return [collapse, setCollapse]
 }

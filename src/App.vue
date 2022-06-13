@@ -4,7 +4,7 @@
 </template>
 
 <style lang="scss">
-  @import "src/assets/scss/define";
+  @import "src/assets/scss/base";
   * {
    margin: 0;
    padding: 0;

@@ -5,37 +5,40 @@
       type="card"
       closable
       class="ds-tags-tabs"
-    >
-      <div
-        v-for="(item, index) in 3"
-        @contextmenu.prevent.capture="handleContextmenu(item, $event)"
-        :key="index">
+      :model-value="$route.path"
+      @tab-change="handleTabChange">
         <el-tab-pane
-          label="哈哈"
-          :name="item.path"
-        >
+          v-for="(item) in visitedTags"
+          :key="item.path"
+          :name="item.path">
+          <template #label>
+            <span @contextmenu.prevent="handleContextmenu(item, $event)">{{ item?.meta?.title }}</span>
+          </template>
         </el-tab-pane>
-      </div>
     </el-tabs>
     <ul
       class="ds-tags-contextmenu"
-      :style="{ left: `${position.left}px`, top: `${position.top}px` }"
+      :style="{ left: `${left}px`, top: `${top}px` }"
       v-show="visible">
-      <li>关闭</li>
-      <li>关闭其他</li>
-      <li>关闭所有</li>
+      <li @click="handleTagClose">关闭</li>
+      <li @click="handleOtherTagsClose">关闭其他</li>
+      <li @click="handleAllTagsClose">关闭所有</li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
 
-  const visible = ref<boolean>(false)
+  import { useVisitedTags } from 'src/layout/hooks'
+  import { RouteLocationNormalizedLoaded } from 'vue-router'
 
-  const refTags = ref<HTMLElement | null>(null)
+  const [visitedTags, handleTabChange] = useVisitedTags()
 
-  const position = reactive({ left: 0, top: 0 })
-  const handleContextmenu = (tag: any, event: MouseEvent) => {
+  const position = reactive({ left: 0, top: 0, visible: false })
+  const refTags = ref<HTMLElement>()
+  const selectedTag = ref<RouteLocationNormalizedLoaded>()
+  const handleContextmenu = (tag: RouteLocationNormalizedLoaded, event: MouseEvent) => {
+    selectedTag.value = tag
     if (refTags.value) {
       const menuMinWidth = 105
       const offsetLeft = refTags.value.getBoundingClientRect().left
@@ -44,16 +47,46 @@
       const left = event.clientX - offsetLeft + 15
       position.left = left > maxLeft ? maxLeft : left
       position.top = event.clientY - offsetHeight
-      visible.value = true
+      position.visible = true
     }
   }
-
-  const handleContextmenuClose = () => visible.value = false
-  watch(visible, (v) => {
+  const handleContextmenuClose = () => position.visible = false
+  watch(() => position.visible, (v) => {
     v ? document.body.addEventListener('click', handleContextmenuClose)
       : document.body.removeEventListener('click', handleContextmenuClose)
   })
+  const { top, left, visible } = toRefs(position)
 
+  const router = useRouter()
+
+  // 关闭
+  const handleTagClose = () => {
+    visitedTags.value = visitedTags
+      .value
+      .filter(item => item.path !== selectedTag.value?.path)
+    const latestTag = visitedTags.value.slice(-1)[0]
+    if (latestTag) {
+      router.push(latestTag)
+    } else {
+      router.replace('/')
+    }
+  }
+
+  // 关闭其它
+  const handleOtherTagsClose = () => {
+    visitedTags.value = visitedTags
+      .value
+      .filter(item => item.path === selectedTag.value?.path)
+    if (selectedTag.value) {
+      router.push(selectedTag.value)
+    }
+  }
+
+  // 关闭所有
+  const handleAllTagsClose = () => {
+    visitedTags.value = []
+    router.replace('/')
+  }
 </script>
 
 <style></style>
