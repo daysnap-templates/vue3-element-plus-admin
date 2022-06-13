@@ -87,9 +87,8 @@
     visitedTags.value = []
     router.replace('/')
   }
-</script>
 
-<style></style>
+</script>
 
 <style lang="scss" scoped>
   @import "src/layout/styles/index";
