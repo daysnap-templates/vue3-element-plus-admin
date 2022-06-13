@@ -42,3 +42,29 @@
   })
 
 </script>
+
+<style lang="scss" scoped>
+  @import "src/layout/styles/define";
+
+  @include b(slidebar) {
+    @extend %df;
+    @extend %fdc;
+    @extend %h100;
+    width: 210px;
+    background-color: #ddd;
+    transition: all .3s;
+
+    @include when(collapse) {
+      width: 62px;
+    }
+
+    @include e(scrollbar) {
+      @extend %df1;
+    }
+
+    @include e(menu) {
+      width: 100% !important;
+    }
+
+  }
+</style>

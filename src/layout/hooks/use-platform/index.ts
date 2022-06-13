@@ -19,5 +19,7 @@ export const usePlatform = () => {
     window.removeEventListener('resize', handleResize)
   })
 
+  handleResize()
+
   return platform
 }
