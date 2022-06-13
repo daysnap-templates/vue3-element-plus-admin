@@ -6,6 +6,7 @@
       closable
       class="ds-tags-tabs"
       :model-value="$route.path"
+      @tab-remove="handleTabRemove"
       @tab-change="handleTabChange">
         <el-tab-pane
           v-for="(item) in visitedTags"
@@ -58,6 +59,12 @@
   const { top, left, visible } = toRefs(position)
 
   const router = useRouter()
+
+  // 点击关闭tab
+  const handleTabRemove = (path: string) => {
+    selectedTag.value = { path } as any
+    handleTagClose()
+  }
 
   // 关闭
   const handleTagClose = () => {

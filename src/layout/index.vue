@@ -48,7 +48,6 @@
     @extend %w100;
     @extend %df;
     @extend %pr;
-    background-color: #f2f2f2;
 
     @include e(inner) {
       @extend %df1;
@@ -60,6 +59,7 @@
       @extend %h100;
       @extend %t0;
       @extend %l0;
+      @extend %dn;
       background-color: rgb(0, 0, 0, .3);
       z-index: 9;
     }
@@ -82,22 +82,21 @@
           width: 210px;
         }
       }
-    }
 
-    @include when(show-slidebar) {
-      .ds-layout-mask{
-        @extend %db;
+      &.is-show-slidebar{
+        .ds-layout-mask{
+          @extend %db;
+        }
+      }
+
+      &.is-hide-slidebar{
+        .ds-layout-mask{
+          @extend %dn;
+        }
+        .ds-slidebar{
+          transform: translate3d(-100%, 0, 0);
+        }
       }
     }
-
-    @include when(hide-slidebar) {
-      .ds-layout-mask{
-        @extend %dn;
-      }
-      .ds-slidebar{
-        transform: translate3d(-100%, 0, 0);
-      }
-    }
-
   }
 </style>

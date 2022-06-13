@@ -13,13 +13,14 @@
         :key="item.path + index"
         @click="handleLink(item, computedList.length - 1 === index)"
       >
-        {{ item.meta.title }}
+        {{ item.meta?.title }}
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
 </template>
 
 <script setup lang="ts">
+
   import * as ptr from 'path-to-regexp'
   import { RouteLocationMatched, RouteLocationRaw } from 'vue-router'
 
@@ -45,6 +46,7 @@
 </script>
 
 <style lang="scss" scoped>
+
   @import "src/layout/styles/define";
 
   @include b(bread-crumb) {

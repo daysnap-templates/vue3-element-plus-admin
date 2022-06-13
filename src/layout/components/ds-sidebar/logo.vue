@@ -9,7 +9,7 @@
         v-if="collapse"
       >
         <img src="src/assets/logo.png" alt="logo"/>
-        <h1>XX管理系统</h1>
+        <h1>VUEVUEVUE</h1>
       </router-link>
       <router-link
         class="is-expand"
@@ -18,7 +18,7 @@
         to="/"
       >
         <img src="src/assets/logo.png" alt="logo"/>
-        <h1>XX管理系统</h1>
+        <h1>VUEVUEVUE</h1>
       </router-link>
     </transition>
   </div>
@@ -39,7 +39,7 @@
     @extend %pr;
     @extend %oh;
     @extend %w100;
-    height: 50px;
+    height: $navbar-height;
     img{
       width: 32px;
       height: 32px;

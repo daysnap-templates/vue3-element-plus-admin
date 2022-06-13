@@ -36,8 +36,7 @@
   @include b(navbar) {
     @extend %df;
     @extend %aic;
-    background-color: #aaa;
-    height: 50px;
+    height: $navbar-height;
 
     @include e(right) {
       @extend %df;

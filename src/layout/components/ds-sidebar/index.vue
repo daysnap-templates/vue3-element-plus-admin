@@ -50,12 +50,12 @@
     @extend %df;
     @extend %fdc;
     @extend %h100;
-    width: 210px;
-    background-color: #ddd;
+    width: $slider-bar-width;
+    background-color: $slider-bar-background-color;
     transition: all .3s;
 
     @include when(collapse) {
-      width: 62px;
+      width: $slider-bar-collapse-width;
     }
 
     @include e(scrollbar) {
