@@ -4,7 +4,7 @@
     'is-collapse': collapse
   }">
     <ds-logo
-      @click="setCollapse(!collapse)"
+      @click="toggle"
       :collapse="collapse"
     />
     <el-scrollbar class="ds-slidebar-scrollbar">
@@ -28,12 +28,12 @@
 
 <script setup lang="ts">
 
-  import { useCollapse } from 'src/layout/hooks'
+  import { useMenuCollapse } from 'src/layout/hooks'
   import DsLogo from './logo.vue'
   import DsSidebarCell from './cell.vue'
 
   const routes = useRouter().options.routes
-  const [ collapse, setCollapse ] = useCollapse()
+  const { collapse, toggle } = useMenuCollapse()
 
   const computedActiveMenu = computed(() => {
     const route = useRoute()
@@ -52,7 +52,7 @@
     @extend %h100;
     width: $slider-bar-width;
     background-color: $slider-bar-background-color;
-    transition: all .3s;
+    transition: width .3s;
 
     @include when(collapse) {
       width: $slider-bar-collapse-width;
@@ -64,6 +64,12 @@
 
     @include e(menu) {
       width: 100% !important;
+    }
+
+    :deep {
+      .el-sub-menu__title{
+        @extend %oh;
+      }
     }
 
   }

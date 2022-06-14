@@ -1,9 +1,9 @@
 
 <template>
   <i class="ds-hamburger"
-     @click="setActive(!isActive)"
+     @click="toggle"
      :class="{
-       'is-active': !isActive
+       'is-active': !collapse
     }"
   >
     <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
@@ -14,9 +14,9 @@
 
 <script setup lang="ts">
 
-  import { useCollapse } from 'src/layout/hooks'
+  import { useMenuCollapse } from 'src/layout/hooks'
 
-  const [ isActive, setActive ] = useCollapse()
+  const { collapse, toggle } = useMenuCollapse()
 
 </script>
 

@@ -5,7 +5,7 @@
     :class="classes">
     <div
       class="ds-layout-mask"
-      @click="setCollapse(!collapse)"
+      @click="toggle"
     ></div>
     <ds-sidebar/>
     <el-container
@@ -28,13 +28,14 @@
   import DsSidebar from './components/ds-sidebar/index.vue'
   import DsNavbar from './components/ds-navbar/index.vue'
   import DsTags from './components/ds-tags/index.vue'
-  import { usePlatform, useCollapse } from './hooks'
+  import { useMenuCollapse } from './hooks'
 
-  const platform = usePlatform()
-  const [ collapse, setCollapse ] = useCollapse()
+  const { collapse, platform, toggle, withoutAnimation } = useMenuCollapse()
+
   const classes = computed(() => {
     return [
       `is-${platform.value}`,
+      withoutAnimation ? `is-without-animation` : '',
       collapse.value ? 'is-hide-slidebar' : 'is-show-slidebar'
     ]
   })
@@ -84,6 +85,20 @@
       @extend %h100;
       padding-top: $navbar-height + 42px;
       background-color: #f6f8f9;
+    }
+
+    @include when(without-animation) {
+      .ds-slidebar{
+        transition: none;
+      }
+    }
+
+    @include when(desktop) {
+      &.is-hide-slidebar{
+        //.ds-slidebar{
+        //  transition: none;
+        //}
+      }
     }
 
     @include when(mobile) {
