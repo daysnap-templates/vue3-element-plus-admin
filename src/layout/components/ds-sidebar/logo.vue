@@ -65,6 +65,9 @@
       }
 
       @include when(expand) {
+        h1{
+          margin-left: 10px;
+        }
       }
     }
 

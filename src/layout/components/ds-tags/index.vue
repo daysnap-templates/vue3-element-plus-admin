@@ -135,6 +135,9 @@
           mask-size: 100% 100%;
         }
       }
+      .el-tabs--card>.el-tabs__header{
+        border-bottom: none;
+      }
     }
 
     @include e(contextmenu) {

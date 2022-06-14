@@ -53,6 +53,9 @@
     width: $slider-bar-width;
     background-color: $slider-bar-background-color;
     transition: width .3s;
+    z-index: 1;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+    //box-shadow: 0 1px 1px #d8dce5;
 
     @include when(collapse) {
       width: $slider-bar-collapse-width;
@@ -69,6 +72,9 @@
     :deep {
       .el-sub-menu__title{
         @extend %oh;
+      }
+      .el-menu{
+        border-right: none;
       }
     }
 

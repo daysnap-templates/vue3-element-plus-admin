@@ -5,14 +5,16 @@ export enum PLATFORM {
 }
 
 const collapse = ref<boolean>(false)
+const platform = ref<string>(PLATFORM.DESKTOP)
+const withoutAnimation = ref<boolean>(false)
 
 export const useMenuCollapse = () => {
 
-  const platform = ref<string>(PLATFORM.DESKTOP)
-  const withoutAnimation = ref<boolean>(false)
-
   // 切换menu
-  const toggle = () => collapse.value = !collapse.value
+  const toggle = () => {
+    withoutAnimation.value = false
+    collapse.value = !collapse.value
+  }
 
   const handleResize = () => {
     const react = document.body.getBoundingClientRect()
@@ -20,6 +22,7 @@ export const useMenuCollapse = () => {
     if (isMobile) {
       // 手机
       withoutAnimation.value = true
+      collapse.value = true
       platform.value = PLATFORM.MOBILE
     } else {
       // PC

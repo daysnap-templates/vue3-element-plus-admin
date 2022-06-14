@@ -33,9 +33,10 @@
   const { collapse, platform, toggle, withoutAnimation } = useMenuCollapse()
 
   const classes = computed(() => {
+    console.log('withoutAnimation.value => ', withoutAnimation.value)
     return [
       `is-${platform.value}`,
-      withoutAnimation ? `is-without-animation` : '',
+      withoutAnimation.value ? `is-without-animation` : '',
       collapse.value ? 'is-hide-slidebar' : 'is-show-slidebar'
     ]
   })
@@ -44,6 +45,10 @@
 
 <style lang="scss">
   @import "src/layout/styles/define";
+
+  body{
+    background-color: #f4f7f9;
+  }
 
   @include b(layout) {
     @extend %h100;
@@ -76,6 +81,8 @@
       background-color: #fff;
       z-index: 9;
       box-shadow: 0 1px 4px rgb(0, 21, 41, .08);
+      //box-shadow: 0 1px 1px #d8dce5;
+      //border-bottom: 1px solid #d8dce5
     }
 
     @include e(main) {
@@ -84,21 +91,16 @@
       @extend %oya;
       @extend %h100;
       padding-top: $navbar-height + 42px;
-      background-color: #f6f8f9;
+      //background-color: #f6f8f9;
     }
 
     @include when(without-animation) {
       .ds-slidebar{
-        transition: none;
+        transition: none !important;
       }
     }
 
     @include when(desktop) {
-      &.is-hide-slidebar{
-        //.ds-slidebar{
-        //  transition: none;
-        //}
-      }
     }
 
     @include when(mobile) {
@@ -107,6 +109,7 @@
         @extend %t0;
         @extend %l0;
         z-index: 99;
+        transition: transform .3s;
         @include when(collapse) {
           width: 210px;
         }
