@@ -72,14 +72,18 @@
       @extend %t0;
       @extend %l0;
       @extend %r0;
+      background-color: #fff;
       z-index: 9;
       box-shadow: 0 1px 4px rgb(0, 21, 41, .08);
     }
 
     @include e(main) {
       @extend %bsb;
+      @extend %pr;
       @extend %oya;
       @extend %h100;
+      padding-top: $navbar-height + 42px;
+      background-color: #f6f8f9;
     }
 
     @include when(mobile) {
