@@ -4,6 +4,11 @@ import Layout from 'src/layout/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/login',
+    hidden: true,
+    component: () => import('src/views/login/index.vue'),
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/home',
@@ -71,6 +76,13 @@ const routes: Array<RouteRecordRaw> = [
       ]
     }
   }),
+
+  {
+    path: '/:catchAll(.*)*',
+    name: '404',
+    redirect: '/',
+    hidden: true,
+  },
 ]
 
 const router = createRouter({

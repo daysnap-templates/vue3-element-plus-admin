@@ -33,7 +33,6 @@
   const { collapse, platform, toggle, withoutAnimation } = useMenuCollapse()
 
   const classes = computed(() => {
-    console.log('withoutAnimation.value => ', withoutAnimation.value)
     return [
       `is-${platform.value}`,
       withoutAnimation.value ? `is-without-animation` : '',
@@ -43,7 +42,7 @@
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "src/layout/styles/define";
 
   body{

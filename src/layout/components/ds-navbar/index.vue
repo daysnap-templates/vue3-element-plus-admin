@@ -21,7 +21,7 @@
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>安全退出</el-dropdown-item>
+            <el-dropdown-item @click="handleExit">安全退出</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -35,6 +35,9 @@
   import DsBreadCrumb from './bread-crumb.vue'
   import DsHamburger from './hamburger.vue'
   import DsScreenFull from './screen-full.vue'
+
+  const router = useRouter()
+  const handleExit = () => router.replace('login')
 </script>
 
 <style lang="scss" scoped>

@@ -53,9 +53,15 @@
 
     @include e(item) {
       @extend %dib;
+      @extend %usn;
+      @extend %cp;
       font-size: 14px;
       line-height: 50px;
       margin-left: 8px;
+
+      @include when(no-redirect) {
+        cursor: default;
+      }
     }
 
     @include e(enter-active) {

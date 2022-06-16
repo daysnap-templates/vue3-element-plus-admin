@@ -117,10 +117,12 @@
         border: none;
       }
       .el-tabs__item{
-        padding: 0 20px !important;
+        @extend %usn;
+        @extend %on;
+        @extend %fwn;
+        padding: 0 24px !important;
         margin-right: -10px;
         border: 0;
-        outline: none;
         font-size: 13px;
         font-weight: 400;
 
