@@ -3,8 +3,8 @@
   <div class="ds-tags" ref="refTags">
     <el-tabs
       type="card"
-      closable
       class="ds-tags-tabs"
+      closable
       :model-value="$route.path"
       @tab-remove="handleTabRemove"
       @tab-change="handleTabChange">
@@ -103,9 +103,12 @@
   @include b(tags) {
     @extend %pr;
     border-top: 1px solid #f6f6f6;
-    padding: 0 10px;
+    padding: 5px 10px 0;
 
     :deep {
+      .el-tabs{
+        --el-tabs-header-height: 30px;
+      }
       .el-tabs__header{
         margin-bottom: 0;
       }
@@ -113,26 +116,22 @@
         border: none;
       }
       .el-tabs__item{
-        height: 38px;
-        padding: 0 30px 0 30px;
-        margin-top: 5.95px;
-        margin-right: -18px;
-        line-height: 38px;
-        text-align: center;
+        padding: 0 20px !important;
+        margin-right: -10px;
         border: 0;
         outline: none;
-        transition: padding .3s cubic-bezier(.645,.045,.355,1)!important;
+        font-size: 12px;
+
+        &:hover {
+          @extend %tabs-mask;
+          color: #515a6e;
+          background: #dee1e6;
+        }
 
         &.is-active {
-          color: var(--el-color-primary) !important;
-          background: var(--el-color-primary-light-9) !important;
-          padding: 0 30px 0 30px;
+          @extend %tabs-mask;
           color: var(--el-color-primary);
           background: var(--el-color-primary-light-9);
-          -webkit-mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
-          mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
-          -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
         }
       }
       .el-tabs--card>.el-tabs__header{
