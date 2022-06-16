@@ -32,6 +32,7 @@
 
   import { useVisitedTags } from 'src/layout/hooks'
   import { RouteLocationNormalizedLoaded } from 'vue-router'
+  import DsSvgIcon from 'src/layout/components/ds-svg-icon/index.vue'
 
   const [visitedTags, handleTabChange] = useVisitedTags()
 
@@ -102,12 +103,12 @@
 
   @include b(tags) {
     @extend %pr;
-    border-top: 1px solid #f6f6f6;
+    box-shadow: 0 -1px 1px 0 #f6f6f6;
     padding: 5px 10px 0;
 
     :deep {
       .el-tabs{
-        --el-tabs-header-height: 30px;
+        --el-tabs-header-height: 35px;
       }
       .el-tabs__header{
         margin-bottom: 0;
@@ -120,7 +121,8 @@
         margin-right: -10px;
         border: 0;
         outline: none;
-        font-size: 12px;
+        font-size: 13px;
+        font-weight: 400;
 
         &:hover {
           @extend %tabs-mask;
@@ -136,6 +138,9 @@
       }
       .el-tabs--card>.el-tabs__header{
         border-bottom: none;
+      }
+      .is-icon-close{
+        width: 14px !important;
       }
     }
 
@@ -156,6 +161,20 @@
           background-color: #eee;
         }
       }
+    }
+
+    @include e(close) {
+      @extend %vam;
+      position: relative;
+      font-size: 12px;
+      width: 0;
+      height: 14px;
+      vertical-align: middle;
+      line-height: 15px;
+      overflow: hidden;
+      top: -1px;
+      right: -2px;
+      transform-origin: 100% 50%;
     }
   }
 
