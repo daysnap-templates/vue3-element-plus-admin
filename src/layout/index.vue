@@ -42,12 +42,14 @@
 
 </script>
 
-<style lang="scss" scoped>
-  @import "src/layout/styles/define";
-
+<style lang="scss">
   body{
     background-color: #f4f7f9;
   }
+</style>
+
+<style lang="scss" scoped>
+  @import "src/layout/styles/define";
 
   @include b(layout) {
     @extend %h100;

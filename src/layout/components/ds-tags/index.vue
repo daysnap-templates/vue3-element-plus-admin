@@ -121,7 +121,7 @@
         @extend %on;
         @extend %fwn;
         padding: 0 24px !important;
-        margin-right: -10px;
+        margin-right: -15px;
         border: 0;
         font-size: 13px;
         font-weight: 400;
