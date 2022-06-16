@@ -1,14 +1,21 @@
 
+import { Ref } from 'vue'
+
 export enum PLATFORM {
   DESKTOP = 'desktop',
   MOBILE = 'mobile',
 }
 
 const collapse = ref<boolean>(false)
-const platform = ref<string>(PLATFORM.DESKTOP)
+const platform = ref<PLATFORM>(PLATFORM.DESKTOP)
 const withoutAnimation = ref<boolean>(false)
 
-export const useMenuCollapse = () => {
+export const useMenuCollapse = (): {
+  toggle: () => void
+  collapse: Ref<boolean>
+  platform: Ref<PLATFORM>
+  withoutAnimation: Ref<boolean>
+} => {
 
   // 切换menu
   const toggle = () => {
@@ -49,6 +56,5 @@ export const useMenuCollapse = () => {
     collapse,
     platform,
     toggle,
-
   }
 }

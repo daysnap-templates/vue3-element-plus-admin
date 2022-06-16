@@ -3,10 +3,7 @@
   <div class="ds-slidebar" :class="{
     'is-collapse': collapse
   }">
-    <ds-logo
-      @click="toggle"
-      :collapse="collapse"
-    />
+    <ds-logo :collapse="collapse"/>
     <el-scrollbar class="ds-slidebar-scrollbar">
       <el-menu
         class="ds-slidebar-menu"
@@ -33,7 +30,7 @@
   import DsSidebarCell from './cell.vue'
 
   const routes = useRouter().options.routes
-  const { collapse, toggle } = useMenuCollapse()
+  const { collapse } = useMenuCollapse()
 
   const computedActiveMenu = computed(() => {
     const route = useRoute()
