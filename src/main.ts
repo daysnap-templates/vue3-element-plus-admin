@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from '@/App.vue'
 import router from '@/router'
+import store from '@/store'
 
 const app = createApp(App)
 
@@ -8,4 +9,4 @@ const app = createApp(App)
   import.meta.glob('./plugins/*.ts', { eager: true }),
 )
 
-app.use(router).mount('#app')
+app.use(router).use(store).mount('#app')
