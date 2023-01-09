@@ -11,6 +11,8 @@
     "prepare": "husky install && echo 'export PATH=\"/usr/local/bin/:$PATH\"' >> ~/.huskyrc"
   },
   "dependencies": {
+    "@daysnap/define-sass": "0.0.10",
+    "@element-plus/icons-vue": "^2.0.10",
     "element-plus": "^2.2.28",
     "path-to-regexp": "^6.2.1",
     "screenfull": "^6.0.2",
