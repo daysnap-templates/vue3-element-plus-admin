@@ -23,3 +23,9 @@ npm install @daysnap/define-sass -D
 
 npm install @daysnap/utils -S
 ```
+
+## 知识点
+
+ts type 
+
+`verbatimModuleSyntax`
