@@ -1,3 +1,1 @@
-import LayoutView from './LayoutView.vue'
-
-export default LayoutView
+export { default as LayoutView } from './LayoutView.vue'

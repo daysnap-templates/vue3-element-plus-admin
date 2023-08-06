@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import LayoutView from '@/layout'
+import { LayoutView } from '@/layout'
 
 export default [
   {
