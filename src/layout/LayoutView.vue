@@ -94,6 +94,11 @@
       }
     }
   }
+  .layout-sidebar {
+    .el-menu {
+      border: none;
+    }
+  }
   .layout-sidebar-mask {
     @extend %pf;
     @extend %t0;

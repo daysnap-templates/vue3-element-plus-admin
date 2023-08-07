@@ -7,6 +7,7 @@
         mode="vertical"
         :collapse="collapse"
         :unique-opened="false"
+        :collapse-transition="false"
         :default-active="computedActiveMenu"
       >
         <SidebarCell
@@ -27,6 +28,8 @@
 
   const routes = useRouter().options.routes
   const { collapse } = useMenuCollapse()
+
+  console.log('routes => ', routes)
 
   const computedActiveMenu = computed(() => {
     const route = useRoute()

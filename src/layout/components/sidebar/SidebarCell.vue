@@ -35,6 +35,7 @@
   }>()
 
   const resolvePath = (routePath: string) => {
+    const { basePath } = props
     if (isExternal(routePath)) {
       return routePath
     }
@@ -62,8 +63,14 @@
     if (showingChildren.length === 0) {
       child = { ...item, path: '' }
     } else if (showingChildren.length > 1) {
-      child = ''
+      child = null
     }
+
+    // if (child?.hidden) {
+    //   child = null
+    // }
+
+    console.log('item => ', child)
 
     return child
   })

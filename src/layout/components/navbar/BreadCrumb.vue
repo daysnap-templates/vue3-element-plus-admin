@@ -1,12 +1,12 @@
 <template>
   <ElBreadcrumb class="layout-breadcrumb">
-    <TransitionGroup name="ds-bread-crumb">
+    <TransitionGroup name="layout-breadcrumb">
       <ElBreadcrumbItem
+        v-for="(item, index) in computedList"
         class="ds-bread-crumb-item"
         :class="{
           'is-no-redirect': computedList.length - 1 === index,
         }"
-        v-for="(item, index) in computedList"
         :key="item.path + index"
         @click="handleLink(item, computedList.length - 1 === index)"
       >
@@ -45,5 +45,21 @@
   @import '@/layout/styles/define.scss';
   .layout-breadcrumb {
     padding: 0 10px;
+    &.is-no-redirect {
+      cursor: default;
+    }
+  }
+  .layout-breadcrumb-enter-active {
+    transition: all 0.5s;
+  }
+  .layout-breadcrumb-leave-active {
+    @extend %pa;
+    transition: all 0.5s;
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  .layout-breadcrumb-enter-from {
+    opacity: 0;
+    transform: translateX(20px);
   }
 </style>

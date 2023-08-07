@@ -6,6 +6,7 @@ export default [
   {
     path: '/login',
     name: 'LoginView',
+    hidden: true,
     component: () => import('@/views/common/LoginView.vue'),
     meta: { title: '登录', requiresAuth: -1 },
   },
@@ -32,6 +33,7 @@ export default [
       children: [
         {
           path: 'menu1',
+          hidden: true,
           component: () => import('@/views/common/DashboardView.vue'),
           meta: { title: '菜单1', icon: 'Basketball' },
         },
