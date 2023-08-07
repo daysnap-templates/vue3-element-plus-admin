@@ -1,7 +1,5 @@
 @import '@/assets/scss/define.scss';
 
-:root{
-  --ds-slider-bar-width: 210px;
-  --ds-slider-bar-collapse-width: 54px;
-  --ds-navbar-height: 50px;
-}
+$slidebar-width: var(--ds-slidebar-width);
+$slidebar-collapse-width: var(--ds-slidebar-collapse-width);
+$navbar-height: var(--ds-navbar-height);

@@ -2,8 +2,10 @@
   <div></div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import * as ptr from 'path-to-regexp'
+</script>
 
 <style lang="scss" scoped>
-  @import '@/assets/scss/define.scss';
+  @import '@/layout/styles/define.scss';
 </style>
