@@ -19,7 +19,7 @@ export default [
       {
         path: 'dashboard',
         component: () => import('@/views/common/DashboardView.vue'),
-        meta: { title: '首页' },
+        meta: { title: '主页', icon: 'Basketball' },
       },
     ],
   },
@@ -33,7 +33,6 @@ export default [
       children: [
         {
           path: 'menu1',
-          hidden: true,
           component: () => import('@/views/common/DashboardView.vue'),
           meta: { title: '菜单1', icon: 'Basketball' },
         },

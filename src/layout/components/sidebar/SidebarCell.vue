@@ -1,26 +1,28 @@
 <template>
-  <template v-if="computedChild">
-    <SidebarLink :to="resolvePath(computedChild.path)" v-if="computedChild.meta">
-      <ElMenuItem :index="resolvePath(computedChild.path)">
-        <SidebarIcon :icon="computedChild.meta.icon" />
-        <template #title>
-          {{ computedChild.meta.title }}
-        </template>
-      </ElMenuItem>
-    </SidebarLink>
-  </template>
-  <ElSubMenu v-else :index="resolvePath(item.path)" popper-append-to-body>
-    <template #title v-if="item.meta">
-      <SidebarIcon :icon="item.meta.icon" />
-      <span>{{ item.meta.title }}</span>
+  <template v-if="!item.hidden">
+    <template v-if="computedOneShowChild">
+      <SidebarLink :to="resolvePath(computedOneShowChild.path)" v-if="computedOneShowChild.meta">
+        <ElMenuItem :index="resolvePath(computedOneShowChild.path)">
+          <SidebarIcon :icon="computedOneShowChild.meta.icon" />
+          <template #title>
+            {{ computedOneShowChild.meta.title }}
+          </template>
+        </ElMenuItem>
+      </SidebarLink>
     </template>
-    <SidebarCell
-      v-for="child in item.children"
-      :key="child.path"
-      :item="child"
-      :base-path="resolvePath(child.path)"
-    />
-  </ElSubMenu>
+    <ElSubMenu v-else :index="resolvePath(item.path)">
+      <template #title v-if="item.meta">
+        <SidebarIcon :icon="item.meta.icon" />
+        <span>{{ item.meta.title }}</span>
+      </template>
+      <SidebarCell
+        v-for="child in item.children"
+        :key="child.path"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+      />
+    </ElSubMenu>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -45,7 +47,7 @@
     return resolve(basePath, routePath)
   }
 
-  const computedChild = computed(() => {
+  const computedOneShowChild = computed(() => {
     const { item } = props
     const { children = [] } = item
 
@@ -65,12 +67,6 @@
     } else if (showingChildren.length > 1) {
       child = null
     }
-
-    // if (child?.hidden) {
-    //   child = null
-    // }
-
-    console.log('item => ', child)
 
     return child
   })

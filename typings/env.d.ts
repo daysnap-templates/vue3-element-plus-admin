@@ -10,6 +10,8 @@ declare module 'vue-router' {
 
     // tabbar icon
     icon?: string
+
+    activePath?: string
   }
 
   interface _RouteRecordBase {
