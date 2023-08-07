@@ -42,6 +42,6 @@
     @extend %l0;
     @extend %t0;
     @extend %b0;
-    background-color: red;
+    background-color: #f2f2f2;
   }
 </style>

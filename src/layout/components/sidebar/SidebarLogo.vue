@@ -28,6 +28,7 @@
     @extend %pr;
     @extend %oh;
     height: $navbar-height;
+    background-color: #999;
     img {
       width: 32px;
       height: 32px;

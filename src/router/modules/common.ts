@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { LayoutView } from '@/layout'
+import { listGenerator } from '@daysnap/utils'
 
 export default [
   {
@@ -21,6 +22,27 @@ export default [
       },
     ],
   },
+
+  ...listGenerator(5, (index) => {
+    return {
+      path: `/page${index}`,
+      component: LayoutView,
+      redirect: `/page${index}/menu1`,
+      meta: { title: `菜单${index}`, icon: 'Basketball' },
+      children: [
+        {
+          path: 'menu1',
+          component: () => import('@/views/common/DashboardView.vue'),
+          meta: { title: '菜单1', icon: 'Basketball' },
+        },
+        {
+          path: 'menu2',
+          component: () => import('@/views/common/DashboardView.vue'),
+          meta: { title: '菜单2', icon: 'Basketball' },
+        },
+      ],
+    }
+  }),
 
   // 404
   // https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html

@@ -1,9 +1,22 @@
 <template>
-  <div></div>
+  <component v-bind="attrs" :is="attrs.is">
+    <slot></slot>
+  </component>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { isExternal } from '@/layout/utils'
 
-<style lang="scss" scoped>
-  @import '@/layout/styles/define.scss';
-</style>
+  const props = defineProps({
+    to: {
+      type: String,
+      default: '',
+    },
+  })
+
+  const attrs = computed(() => {
+    return isExternal(props.to)
+      ? { is: `a`, href: props.to, target: '_blank', rel: 'noopener' }
+      : { is: 'router-link', to: props.to }
+  })
+</script>
