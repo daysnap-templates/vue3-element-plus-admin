@@ -2,11 +2,11 @@
   <div class="layout-navbar">
     <Hamburger />
 
-    <BreadCrumb />
+    <BreadCrumb class="layout-breadcrumb" />
 
-    <div class="layout-navbar-actions">
-      <ScreenFull />
-    </div>
+    <ScreenFull />
+
+    <UserBox />
   </div>
 </template>
 
@@ -14,6 +14,7 @@
   import Hamburger from './Hamburger.vue'
   import BreadCrumb from './BreadCrumb.vue'
   import ScreenFull from './ScreenFull.vue'
+  import UserBox from './UserBox.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -24,9 +25,7 @@
     height: $navbar-height;
     background-color: #ddd;
   }
-  .layout-navbar-actions {
-    @extend %df;
-    @extend %aic;
-    margin-left: auto;
+  .layout-breadcrumb {
+    margin-right: auto;
   }
 </style>

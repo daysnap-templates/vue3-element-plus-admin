@@ -39,6 +39,9 @@
     }
     &.is-desktop {
       .layout-sidebar {
+        transition: width 0.3s;
+      }
+      .layout-inner {
         transition: margin-left 0.3s;
       }
       .layout-header {
@@ -103,7 +106,6 @@
   }
   .layout-inner {
     min-height: 100vh;
-    transition: margin-left 0.3s;
   }
   .layout-header {
     @extend %pf;

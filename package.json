@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@daysnap/utils": "^0.0.58",
+    "@element-plus/icons": "^0.0.11",
     "axios": "^1.4.0",
     "element-plus": "^2.3.9",
     "nprogress": "^0.2.0",

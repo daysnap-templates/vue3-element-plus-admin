@@ -9,6 +9,8 @@ npm init vue@latest
 # 安装依赖包
 npm install element-plus -S
 
+npm install @element-plus/icons -S
+
 npm install unplugin-vue-components unplugin-auto-import -D
 
 npm install sass -D

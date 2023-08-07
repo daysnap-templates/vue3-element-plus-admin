@@ -23,12 +23,20 @@
   @import '@/layout/styles/define.scss';
   .layout-hamburger {
     @extend %cp;
-    padding: 0 15px;
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @extend %h100;
+    width: $navbar-height;
+    transform: background-color 0.3s;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.025);
+    }
     svg {
       @extend %dib;
       @extend %vam;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
     }
 
     &.is-active {
