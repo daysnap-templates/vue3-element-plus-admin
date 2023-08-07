@@ -2,6 +2,7 @@
   <ElDropdown class="layout-user-box" trigger="hover">
     <div class="layout-user-content">
       <img src="@/assets/img/avatar.png" alt="头像" />
+      <span>你好你好</span>
       <ElIcon>
         <CaretBottom />
       </ElIcon>
@@ -21,17 +22,23 @@
 <style lang="scss" scoped>
   @import '@/layout/styles/define.scss';
   .layout-user-box {
-    //
   }
   .layout-user-content {
     @extend %df;
     @extend %aic;
     @extend %cp;
-    padding: 0 10px;
+    outline: none;
+    font-size: 14px;
+    padding: 0 15px;
+    span {
+      @extend %twno;
+      max-width: 60px;
+      margin-right: 5px;
+    }
     img {
       width: 32px;
       height: 32px;
-      margin-right: 10px;
+      margin-right: 5px;
     }
   }
 </style>

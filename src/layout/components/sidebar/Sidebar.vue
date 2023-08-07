@@ -1,8 +1,39 @@
 <template>
-  <div class="layout-sidebar"></div>
+  <div class="layout-sidebar">
+    <SidebarLogo :collapse="collapse" />
+    <ElScrollbar class="layout-sidebar-inner">
+      <ElMenu
+        class="layout-sidebar-menu"
+        mode="vertical"
+        :collapse="collapse"
+        :unique-opened="false"
+        :default-active="computedActiveMenu"
+      >
+        <SidebarCell
+          v-for="route in routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
+      </ElMenu>
+    </ElScrollbar>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { useMenuCollapse } from '@/layout/hooks'
+  import SidebarLogo from './SidebarLogo.vue'
+  import SidebarCell from './SidebarCell.vue'
+
+  const routes = useRouter().options.routes
+  const { collapse } = useMenuCollapse()
+
+  const computedActiveMenu = computed(() => {
+    const route = useRoute()
+    const { meta, path } = route
+    return (meta?.activeMenu ?? path) as string
+  })
+</script>
 
 <style lang="scss" scoped>
   @import '@/layout/styles/define.scss';
