@@ -1,1 +1,1 @@
-export * from './ProSchemaQueryFrom'
+export * from './ProSchemaQueryForm'

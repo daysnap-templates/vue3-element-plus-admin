@@ -1,15 +1,17 @@
 <template>
   <div>
-    <ProSchemaQueryFrom />
+    <ProSchemaQueryForm :fields="objQuery" />
   </div>
 </template>
 
 <script setup lang="ts">
-  const objQuery = {
+  const objQuery = reactive({
     keyword: {
-      is: 'input',
+      is: 'form-input',
+      value: '',
+      placeholder: '请输入关键词检索',
     },
-  }
+  })
 </script>
 
 <style lang="scss" scoped>
