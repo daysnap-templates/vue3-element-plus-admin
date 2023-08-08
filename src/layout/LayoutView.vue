@@ -33,6 +33,7 @@
   @import '@/layout/styles/index.scss';
   .layout-wrap {
     &.is-without-animation {
+      .layout-header,
       .layout-sidebar {
         transition: none !important;
       }
@@ -78,6 +79,9 @@
         z-index: 99;
         width: $slidebar-width;
         transition: transform 0.3s;
+      }
+      .layout-header {
+        width: 100%;
       }
       &.is-show-slidebar {
         .layout-sidebar-mask {

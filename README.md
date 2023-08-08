@@ -26,6 +26,8 @@ npm install @daysnap/define-sass -D
 npm install @daysnap/utils -S
 
 npm install path-to-regexp -S
+
+npm install screenfull -S
 ```
 
 ## 知识点

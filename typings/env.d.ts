@@ -11,6 +11,7 @@ declare module 'vue-router' {
     // tabbar icon
     icon?: string
 
+    // 希望响应激活哪个菜单
     activePath?: string
   }
 
