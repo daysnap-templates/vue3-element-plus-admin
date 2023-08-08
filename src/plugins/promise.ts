@@ -9,6 +9,7 @@ declare global {
     toast(cb?: ToastCallback): Promise<T>
     null(): Promise<T>
     fix(): Promise<T>
+    throw(err?: any): Promise<T>
   }
 }
 
@@ -38,5 +39,14 @@ Promise.prototype.null = async function () {
     return await this
   } catch (err) {
     return console.log(err)
+  }
+}
+
+// 改变错误 error 信息
+Promise.prototype.throw = async function (err = '') {
+  try {
+    return await this
+  } catch {
+    throw err
   }
 }

@@ -1,5 +1,7 @@
 <template>
   <div class="login-view">
+    <div class="decorator is-left"></div>
+    <div class="decorator is-right"></div>
     <div class="view-content">
       <h1>DaySnap管理平台</h1>
       <p>欢迎使用</p>
@@ -15,19 +17,24 @@
           <ElInput
             v-model="objForm.account"
             :prefix-icon="User"
+            :disabled="loading"
             clearable
             placeholder="请填写账号"
           />
         </ElFormItem>
-        <ElFormItem prop="password">
+        <ElFormItem>
           <ElInput
             v-model="objForm.password"
             type="password"
             :prefix-icon="Lock"
+            :disabled="loading"
             clearable
             placeholder="请填写密码"
             show-password
           />
+        </ElFormItem>
+        <ElFormItem prop="password">
+          <el-checkbox v-model="objForm.isRemember" label="记住密码" />
         </ElFormItem>
         <ElFormItem>
           <ElButton class="form-button" type="primary" :loading="loading" @click="handleSubmit">
@@ -40,13 +47,17 @@
 </template>
 
 <script setup lang="ts">
-  import { useForm, useWithLoading } from '@/hooks'
+  import { sleep } from '@daysnap/utils'
   import { Lock, User } from '@element-plus/icons-vue'
+  import { useForm, useWithLoading } from '@/hooks'
+  import { accountInfoStorage } from '@/utils'
 
   const [formInstance, objForm, objFormRules] = useForm(
     {
       account: '',
       password: '',
+      isRemember: false,
+      ...accountInfoStorage.getItem({}),
     },
     {
       account: [{ required: true, message: '请填写账号', trigger: 'blur' }],
@@ -54,14 +65,16 @@
     },
   )
 
+  const router = useRouter()
   const [loading, handleSubmit] = useWithLoading(async () => {
     if (!formInstance.value) {
       return
     }
-    const res = await formInstance.value.validate().catch(() => {
-      throw ''
-    })
-    console.log('res => ', res)
+    await formInstance.value.validate().throw()
+    await sleep(2000)
+    const { isRemember } = objForm
+    accountInfoStorage.setItem(isRemember ? objForm : { isRemember })
+    router.replace('/')
   })
 </script>
 
@@ -73,10 +86,30 @@
     min-height: 100vh;
     padding: 64px 0px 32px;
   }
+  .decorator {
+    @extend %pf;
+    @extend %br50;
+    @extend %pen;
+    height: 1000px;
+    width: 1000px;
+    &.is-right {
+      right: -600px;
+      top: -50px;
+      --color: rgba(3, 216, 165, 0.4);
+      background: radial-gradient(closest-side circle, var(--color), rgba(255, 255, 255, 0.1));
+    }
+    &.is-left {
+      top: -200px;
+      left: -600px;
+      --color: rgba(255, 0, 210, 0.15);
+      background: radial-gradient(closest-side circle, var(--color), rgba(255, 255, 255, 0.05));
+    }
+  }
   .view-content {
     @extend %w100;
     @extend %ma;
     @extend %bsb;
+    @extend %pr;
     padding: 42px;
     max-width: 420px;
     h1 {
