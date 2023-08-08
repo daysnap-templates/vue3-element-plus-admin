@@ -21,6 +21,8 @@ npm install axios -S
 
 npm install nprogress -S
 
+npm install @types/nprogress -D
+
 npm install @daysnap/define-sass -D
 
 npm install @daysnap/utils -S

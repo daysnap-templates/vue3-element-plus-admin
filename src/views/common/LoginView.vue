@@ -3,8 +3,8 @@
     <div class="decorator is-left"></div>
     <div class="decorator is-right"></div>
     <div class="view-content" @keyup.enter="handleSubmit">
-      <h1>DaySnap管理平台</h1>
-      <p>欢迎使用</p>
+      <h1>{{ metadata.title }}</h1>
+      <p>{{ metadata.subtitle }}</p>
       <ElForm
         class="form-section"
         label-position="top"
@@ -52,6 +52,7 @@
   import { Lock, User } from '@element-plus/icons-vue'
   import { useForm, useWithLoading } from '@/hooks'
   import { accountInfoStorage } from '@/utils'
+  import { metadata } from '@/metadata'
 
   const [formInstance, objForm, objFormRules] = useForm(
     {

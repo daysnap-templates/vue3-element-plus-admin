@@ -3,17 +3,19 @@
     <Transition name="layout-sidebar-logo-fade">
       <RouterLink class="is-collapse" to="/" key="collapse" v-if="collapse">
         <img src="@/assets/img/logo.png" alt="logo" />
-        <h1>VUEVUEVUE</h1>
+        <span>{{ metadata.title }}</span>
       </RouterLink>
       <RouterLink class="is-expand" key="expand" v-else to="/">
         <img src="src/assets/img/logo.png" alt="logo" />
-        <h1>VUEVUEVUE</h1>
+        <span>{{ metadata.title }}</span>
       </RouterLink>
     </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { metadata } from '@/metadata'
+
   defineProps({
     collapse: {
       type: Boolean,
@@ -46,7 +48,7 @@
       color: var(--ds-slidebar-logo-text-color);
 
       &.is-collapse {
-        h1 {
+        span {
           @extend %pa;
           @extend %oh;
           font-size: 0;
@@ -58,7 +60,7 @@
       }
 
       &.is-expand {
-        h1 {
+        span {
           margin-left: 10px;
         }
       }
