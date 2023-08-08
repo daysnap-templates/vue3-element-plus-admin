@@ -3,7 +3,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router'
 
 type VisitedTags = Ref<Array<RouteLocationNormalizedLoaded>>
 
-export const useVisitedTags = (): [VisitedTags, (path?: string | []) => void] => {
+export const useVisitedTags = () => {
   const route = useRoute()
   const visitedTags: VisitedTags = ref([])
   watch(
@@ -17,7 +17,7 @@ export const useVisitedTags = (): [VisitedTags, (path?: string | []) => void] =>
   )
 
   const router = useRouter()
-  const setVisitedTags = (path?: string | [] | number) => {
+  const setVisitedTags = (path?: any) => {
     if (Array.isArray(path)) {
       visitedTags.value = []
     } else {
@@ -27,5 +27,5 @@ export const useVisitedTags = (): [VisitedTags, (path?: string | []) => void] =>
       }
     }
   }
-  return [visitedTags, setVisitedTags]
+  return [visitedTags, setVisitedTags] as const
 }

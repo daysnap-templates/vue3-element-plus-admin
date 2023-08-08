@@ -99,12 +99,12 @@
   @import '@/layout/styles/define.scss';
   .layout-tags {
     @extend %pr;
-    box-shadow: 0 -1px 1px 0 #f6f6f6;
+    box-shadow: 0 1px 1px 0 #f6f6f6 inset;
     padding: 5px 10px 0;
 
     :deep {
       .el-tabs {
-        --el-tabs-header-height: 35px;
+        --el-tabs-header-height: 32px;
       }
       .el-tabs__header {
         margin-bottom: 0;

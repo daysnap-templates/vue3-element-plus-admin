@@ -95,8 +95,22 @@
     }
   }
   .layout-sidebar {
+    --el-menu-bg-color: var(--ds-menu-bg-color);
+    --el-menu-hover-bg-color: var(--ds-menu-hover-bg-color);
+    --el-menu-text-color: var(--ds-menu-text-color);
+    --el-menu-hover-text-color: var(--ds-menu-hover-text-color);
+    background-color: var(--ds-slidebar-bg-color);
     .el-menu {
       border: none;
+      user-select: none;
+    }
+    .el-sub-menu {
+      .el-menu-item {
+        background-color: var(--el-sub-menu-bg-color);
+        &:hover {
+          background-color: var(--el-sub-menu-hover-bg-color);
+        }
+      }
     }
   }
   .layout-sidebar-mask {
@@ -116,8 +130,10 @@
     @extend %pf;
     @extend %t0;
     @extend %r0;
+    background-color: var(--ds-header-bg-color);
+    box-shadow: 0 1px 4px rgb(0, 21, 41, 0.08);
   }
   .layout-content {
-    padding-top: $navbar-height + 42px;
+    padding-top: calc($navbar-height + 37px);
   }
 </style>

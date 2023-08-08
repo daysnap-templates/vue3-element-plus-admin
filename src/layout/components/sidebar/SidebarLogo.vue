@@ -28,10 +28,10 @@
     @extend %pr;
     @extend %oh;
     height: $navbar-height;
-    background-color: #999;
+    background-color: var(--ds-slidebar-logo-bg-color);
     img {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
     }
     a {
       @extend %df;
@@ -41,6 +41,9 @@
       @extend %pr;
       @extend %w100;
       @extend %wsn;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ds-slidebar-logo-text-color);
 
       &.is-collapse {
         h1 {

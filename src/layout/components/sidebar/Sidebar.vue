@@ -29,8 +29,6 @@
   const routes = useRouter().options.routes
   const { collapse } = useMenuCollapse()
 
-  console.log('routes => ', routes)
-
   const computedActiveMenu = computed(() => {
     const route = useRoute()
     const { meta, path } = route
@@ -45,6 +43,5 @@
     @extend %l0;
     @extend %t0;
     @extend %b0;
-    background-color: #f2f2f2;
   }
 </style>

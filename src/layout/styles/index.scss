@@ -1,7 +1,23 @@
 @import 'define.scss';
 
 :root{
+  // navbar
+  --ds-navbar-height: 50px;
+
+  --ds-header-bg-color: #ffffff;
+
+  // slidebar
   --ds-slidebar-width: 210px;
   --ds-slidebar-collapse-width: 64px;
-  --ds-navbar-height: 50px;
+  --ds-slidebar-bg-color: #304156;
+  --ds-slidebar-logo-bg-color: #2b2f3a;
+  --ds-slidebar-logo-text-color: #ffffff;
+  
+  // menu
+  --ds-menu-bg-color: #304156;
+  --ds-menu-hover-bg-color: #263445;
+  --ds-menu-text-color: #bfcbd9;
+  --ds-menu-hover-text-color: #bfcbd9;
+  --el-sub-menu-bg-color: #1f2d3d;
+  --el-sub-menu-hover-bg-color: #001528;
 }

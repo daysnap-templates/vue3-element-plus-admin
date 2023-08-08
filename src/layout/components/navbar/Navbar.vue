@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
   import Hamburger from './Hamburger.vue'
-  import BreadCrumb from './BreadCrumb.vue'
+  import BreadCrumb from './Breadcrumb.vue'
   import ScreenFull from './ScreenFull.vue'
   import UserBox from './UserBox.vue'
 </script>
@@ -23,7 +23,6 @@
     @extend %df;
     @extend %aic;
     height: $navbar-height;
-    background-color: #ddd;
   }
   .layout-breadcrumb {
     margin-right: auto;
