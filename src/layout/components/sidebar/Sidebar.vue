@@ -43,5 +43,10 @@
     @extend %l0;
     @extend %t0;
     @extend %b0;
+    @extend %df;
+    @extend %fdc;
+  }
+  .layout-sidebar-inner {
+    @extend %df1;
   }
 </style>
