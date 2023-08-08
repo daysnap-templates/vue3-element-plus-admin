@@ -1,5 +1,4 @@
 import type { Plugin, AppConfig } from 'vue'
-import { ElMessage } from 'element-plus'
 import { __DEV__, excludeMessage } from '@/utils'
 import { formatMessage } from '@daysnap/utils'
 

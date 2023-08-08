@@ -9,7 +9,7 @@
     </div>
     <template #dropdown>
       <ElDropdownMenu>
-        <ElDropdownItem>安全退出</ElDropdownItem>
+        <ElDropdownItem @click="handleExit">安全退出</ElDropdownItem>
       </ElDropdownMenu>
     </template>
   </ElDropdown>
@@ -17,12 +17,18 @@
 
 <script setup lang="ts">
   import { CaretBottom } from '@element-plus/icons'
+
+  const router = useRouter()
+
+  const handleExit = async () => {
+    await ElMessageBox.confirm(`确认是否退出该账号？`)
+    router.replace('/login')
+    ElMessage.success(`退出成功`)
+  }
 </script>
 
 <style lang="scss" scoped>
   @import '@/layout/styles/define.scss';
-  .layout-user-box {
-  }
   .layout-user-content {
     @extend %df;
     @extend %aic;

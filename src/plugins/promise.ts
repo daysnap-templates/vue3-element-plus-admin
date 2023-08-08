@@ -1,4 +1,3 @@
-import { ElMessage } from 'element-plus'
 import { formatMessage, isFunction } from '@daysnap/utils'
 import { excludeMessage } from '@/utils'
 
@@ -25,10 +24,7 @@ Promise.prototype.toast = async function (cb) {
     }
 
     if (cb !== false && !excludeMessage(message)) {
-      ElMessage({
-        message,
-        type: 'warning',
-      })
+      ElMessage.warning(message)
     }
   }
 }

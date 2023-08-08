@@ -2,7 +2,7 @@
   <div class="login-view">
     <div class="decorator is-left"></div>
     <div class="decorator is-right"></div>
-    <div class="view-content">
+    <div class="view-content" @keyup.enter="handleSubmit">
       <h1>DaySnap管理平台</h1>
       <p>欢迎使用</p>
       <ElForm
@@ -12,6 +12,7 @@
         ref="formInstance"
         :model="objForm"
         :rules="objFormRules"
+        @submit="handleSubmit"
       >
         <ElFormItem prop="account">
           <ElInput
@@ -34,7 +35,7 @@
           />
         </ElFormItem>
         <ElFormItem prop="password">
-          <el-checkbox v-model="objForm.isRemember" label="记住密码" />
+          <el-checkbox v-model="objForm.isRemember" label="记住密码" :disabled="loading" />
         </ElFormItem>
         <ElFormItem>
           <ElButton class="form-button" type="primary" :loading="loading" @click="handleSubmit">
@@ -75,6 +76,7 @@
     const { isRemember } = objForm
     accountInfoStorage.setItem(isRemember ? objForm : { isRemember })
     router.replace('/')
+    ElMessage.success(`登录成功`)
   })
 </script>
 

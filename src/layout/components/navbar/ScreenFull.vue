@@ -9,7 +9,6 @@
 <script setup lang="ts">
   import screenfull from 'screenfull'
   import { FullScreen } from '@element-plus/icons'
-  import type { ElTooltip } from 'element-plus'
 
   const isFullscreen = ref(false)
 
