@@ -1,9 +1,17 @@
 <template>
-  <div>Sidebar</div>
+  <div class="navbar">
+    <Collapse />
+  </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Collapse from '@/layout/components/Navbar/Collapse.vue'
+</script>
 
 <style lang="scss" scoped>
-@import 'src/assets/scss/define';
+.navbar {
+  height: 72px;
+  background-color: #fff;
+  box-shadow: 4px 4px 40px 0 rgb(0 0 0 / 5%);
+}
 </style>

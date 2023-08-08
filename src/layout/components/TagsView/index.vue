@@ -1,9 +1,12 @@
 <template>
-  <div>Sidebar</div>
+  <div class="tagsview">tag</div>
 </template>
 
 <script lang="ts" setup></script>
 
 <style lang="scss" scoped>
-@import 'src/assets/scss/define';
+.tagsview {
+  height: 40px;
+  background-color: aquamarine;
+}
 </style>
