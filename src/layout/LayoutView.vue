@@ -138,6 +138,8 @@
     box-shadow: 0 1px 4px rgb(0, 21, 41, 0.08);
   }
   .layout-content {
-    padding-top: calc($navbar-height + 37px);
+    @extend %bsb;
+    padding: 16px;
+    padding-top: calc($navbar-height + 37px + 16px);
   }
 </style>

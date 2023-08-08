@@ -17,7 +17,7 @@
         <ElFormItem prop="account">
           <ElInput
             v-model="objForm.account"
-            :prefix-icon="User"
+            prefix-icon="User"
             :disabled="loading"
             clearable
             placeholder="请填写账号"
@@ -27,7 +27,7 @@
           <ElInput
             v-model="objForm.password"
             type="password"
-            :prefix-icon="Lock"
+            prefix-icon="Lock"
             :disabled="loading"
             clearable
             placeholder="请填写密码"
@@ -49,7 +49,6 @@
 
 <script setup lang="ts">
   import { sleep } from '@daysnap/utils'
-  import { Lock, User } from '@element-plus/icons-vue'
   import { useForm, useWithLoading } from '@/hooks'
   import { accountInfoStorage } from '@/utils'
   import { metadata } from '@/metadata'

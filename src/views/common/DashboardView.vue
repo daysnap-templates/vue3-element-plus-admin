@@ -1,6 +1,16 @@
 <template>
-  <div class="view-wrap">Dashboard</div>
+  <div>
+    <ProSchemaQueryFrom />
+  </div>
 </template>
+
+<script setup lang="ts">
+  const objQuery = {
+    keyword: {
+      is: 'input',
+    },
+  }
+</script>
 
 <style lang="scss" scoped>
   .view-wrap {
