@@ -9,5 +9,3 @@ export interface QueryFormField {
   }
   options?: any
 }
-
-export type QueryFormMetadata = (QueryFormField | (() => QueryFormField[]))[]

@@ -1,11 +1,11 @@
 <template>
   <div class="pro-schema-query-form">
-    <div class="form-cell" v-for="(item, key) in fields" :key="key" :class="[item.is]">
+    <div class="form-cell" v-for="item in fields" :key="item.key" :class="[item.is]">
       <span class="form-cell-label" v-if="item.label">{{ item.label }}</span>
 
       <ElInput
         v-if="item.is === 'form-input'"
-        v-model="query[key]"
+        v-model="query[item.key]"
         placeholder="请填写"
         clearable
         v-bind="item.props"
@@ -13,7 +13,7 @@
 
       <ElSelect
         v-else-if="item.is === 'form-select'"
-        v-model="query[key]"
+        v-model="query[item.key]"
         placeholder="请选择"
         clearable
         v-bind="item.props"
@@ -28,7 +28,7 @@
       </ElSelect>
 
       <template v-else-if="item.is === 'form-radio'">
-        <ElRadioGroup v-model="query[key]">
+        <ElRadioGroup v-model="query[item.key]">
           <ElRadio
             v-for="(option, index) in item.options"
             v-bind="option.props"
@@ -41,7 +41,7 @@
       </template>
 
       <template v-else-if="item.is === 'form-checkbox'">
-        <ElCheckboxGroup v-model="query[key]" v-bind="item.props">
+        <ElCheckboxGroup v-model="query[item.key]" v-bind="item.props">
           <ElCheckbox
             v-for="(option, index) in item.options"
             v-bind="option.props"
@@ -55,7 +55,7 @@
 
       <ElDatePicker
         v-else-if="item.is === 'form-date-picker'"
-        v-model="query[key]"
+        v-model="query[item.key]"
         type="date"
         placeholder="请选择"
         clearable
@@ -71,28 +71,62 @@
 </template>
 
 <script setup lang="ts">
-  import type { QueryFormField, QueryFormMetadata } from '@/types'
+  import type { QueryFormField } from '@/types'
+  import {
+    isFunction,
+    isUndefined,
+    pick,
+    cloneSimple,
+    filterEmptyValue,
+    isEmptyObject,
+  } from '@daysnap/utils'
   import type { PropType } from 'vue'
 
-  const emits = defineEmits(['confirm'])
+  const emits = defineEmits(['confirm', 'change'])
   const props = defineProps({
-    metadata: { type: Array as PropType<QueryFormMetadata>, default: () => [] },
+    schema: { type: Array as PropType<QueryFormField[]>, default: () => [] },
   })
 
   const query = ref<Record<string, any>>({})
-  // const computedFields = computed<any>(() => {
-  //   return props.metadata
-  // })
 
   // 初始化数据
   const fields = ref<QueryFormField[]>([])
-  let initialValues = {}
+  let initialValues: Record<string, any>
 
   watch(
-    () => props.metadata,
-    (metadata) => {
-      // 初始化数据
-      // 获取初始化数据
+    () => query.value,
+    (nv, ov) => {
+      if (!isEmptyObject(ov)) {
+        emits('change', nv, ov)
+      }
+    },
+    {
+      immediate: false,
+      deep: true,
+    },
+  )
+
+  watch(
+    () => props.schema,
+    (schema) => {
+      const queryFormFields: QueryFormField[] = []
+      initialValues = {}
+      schema.forEach((item) => {
+        if (isFunction(item)) {
+          queryFormFields.push(...item(query.value))
+        } else {
+          queryFormFields.push(item)
+        }
+      })
+      const keys = queryFormFields.map((item) => {
+        const { key, initialValue } = item
+        if (!isUndefined(initialValue)) {
+          initialValues[key] = initialValue
+        }
+        return item.key
+      })
+      query.value = pick({ ...initialValues, ...filterEmptyValue(query.value) }, keys)
+      fields.value = queryFormFields
     },
     {
       immediate: true,
@@ -102,13 +136,14 @@
 
   // 查询
   const handleConfirm = () => {
-    console.log('query => ', query.value)
-    emits('confirm', query.value)
+    const value = cloneSimple(filterEmptyValue(query.value))
+    console.log('query => ', value)
+    emits('confirm', value)
   }
 
   // 重置
   const handleReset = () => {
-    query.value = {}
+    query.value = cloneSimple(initialValues)
     handleConfirm()
   }
 </script>

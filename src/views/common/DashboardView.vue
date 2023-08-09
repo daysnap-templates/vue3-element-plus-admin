@@ -1,15 +1,15 @@
 <template>
   <div>
-    <ProSchemaQueryForm :metadata="queryMetadata" />
+    <ProSchemaQueryForm :schema="querySchema" />
   </div>
 </template>
 
 <script setup lang="ts">
-  const queryMetadata = reactive([
+  const querySchema = [
     {
       key: 'x1',
       is: 'form-input',
-      initialValue: '',
+      initialValue: '1',
       placeholder: '请输入关键词检索',
       props: {},
     },
@@ -81,7 +81,7 @@
         endPlaceholder: '结束时间',
       },
     },
-  ])
+  ]
 </script>
 
 <style lang="scss" scoped>
