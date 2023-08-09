@@ -1,20 +1,22 @@
 <template>
   <div>
-    <ProSchemaQueryForm :fields="queryFields" />
+    <ProSchemaQueryForm :metadata="queryMetadata" />
   </div>
 </template>
 
 <script setup lang="ts">
-  const queryFields = reactive({
-    x1: {
+  const queryMetadata = reactive([
+    {
+      key: 'x1',
       is: 'form-input',
-      value: '',
+      initialValue: '',
       placeholder: '请输入关键词检索',
       props: {},
     },
-    x2: {
+    {
+      key: 'x2',
       is: 'form-select',
-      value: '',
+      initialValue: '',
       placeholder: '请选择年级',
       options: [
         { label: '一年级', value: 1 },
@@ -22,18 +24,20 @@
         { label: '三年级', value: 3 },
       ],
     },
-    x3: {
+    {
+      key: 'x3',
       is: 'form-radio',
-      value: '',
+      initialValue: '',
       label: '性别：',
       options: [
         { label: '男', value: 1 },
         { label: '女', value: 2 },
       ],
     },
-    x4: {
+    {
+      key: 'x4',
       is: 'form-checkbox',
-      value: [],
+      initialValue: [],
       label: '爱好：',
       options: [
         { label: '唱', value: 1 },
@@ -42,38 +46,42 @@
         { label: '🏀', value: 4 },
       ],
     },
-    x5: {
+    {
+      key: 'x5',
       is: 'form-date-picker',
-      value: '',
+      initialValue: '',
       placeholder: '请选择日期',
     },
-    x6: {
+    {
+      key: 'x6',
       is: 'form-date-picker',
-      value: '',
+      initialValue: '',
       props: {
         type: 'daterange',
         startPlaceholder: '开始日期',
         endPlaceholder: '结束日期',
       },
     },
-    x7: {
+    {
+      key: 'x7',
       is: 'form-date-picker',
-      value: '',
+      initialValue: '',
       placeholder: '请选择日期时间',
       props: {
         type: 'datetime',
       },
     },
-    x8: {
+    {
+      key: 'x8',
       is: 'form-date-picker',
-      value: '',
+      initialValue: '',
       props: {
         type: 'datetimerange',
         startPlaceholder: '开始时间',
         endPlaceholder: '结束时间',
       },
     },
-  })
+  ])
 </script>
 
 <style lang="scss" scoped>

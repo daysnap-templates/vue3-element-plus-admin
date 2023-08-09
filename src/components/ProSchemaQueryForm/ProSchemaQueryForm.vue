@@ -5,16 +5,16 @@
 
       <ElInput
         v-if="item.is === 'form-input'"
-        v-model="item.value"
-        :placeholder="item.placeholder || '请填写'"
+        v-model="query[key]"
+        placeholder="请填写"
         clearable
         v-bind="item.props"
       />
 
       <ElSelect
         v-else-if="item.is === 'form-select'"
-        v-model="item.value"
-        :placeholder="item.placeholder || '请选择'"
+        v-model="query[key]"
+        placeholder="请选择"
         clearable
         v-bind="item.props"
       >
@@ -28,7 +28,7 @@
       </ElSelect>
 
       <template v-else-if="item.is === 'form-radio'">
-        <ElRadioGroup v-model="item.value">
+        <ElRadioGroup v-model="query[key]">
           <ElRadio
             v-for="(option, index) in item.options"
             v-bind="option.props"
@@ -41,7 +41,7 @@
       </template>
 
       <template v-else-if="item.is === 'form-checkbox'">
-        <ElCheckboxGroup v-model="item.value" v-bind="item.props">
+        <ElCheckboxGroup v-model="query[key]" v-bind="item.props">
           <ElCheckbox
             v-for="(option, index) in item.options"
             v-bind="option.props"
@@ -55,32 +55,62 @@
 
       <ElDatePicker
         v-else-if="item.is === 'form-date-picker'"
-        v-model="item.value"
+        v-model="query[key]"
         type="date"
-        :placeholder="item.placeholder"
+        placeholder="请选择"
         clearable
         v-bind="item.props"
       />
     </div>
 
     <div class="form-cell">
-      <ElButton type="primary" plain icon="Search">查询</ElButton>
-      <ElButton plain icon="RefreshRight">重置</ElButton>
+      <ElButton type="primary" plain icon="Search" @click="handleConfirm">查询</ElButton>
+      <ElButton plain icon="RefreshRight" @click="handleReset">重置</ElButton>
     </div>
-
-    <!-- <div class="form-cell" key="actions"> -->
-    <!-- <ElButton type="primary" icon="Search">导入</ElButton> -->
-    <!-- <ElButton icon="RefreshRight">导出</ElButton> -->
-    <!-- </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ElButtonGroup, ElCheckboxGroup } from 'element-plus'
+  import type { QueryFormField, QueryFormMetadata } from '@/types'
+  import type { PropType } from 'vue'
 
-  defineProps({
-    fields: { type: Object, default: () => ({}) },
+  const emits = defineEmits(['confirm'])
+  const props = defineProps({
+    metadata: { type: Array as PropType<QueryFormMetadata>, default: () => [] },
   })
+
+  const query = ref<Record<string, any>>({})
+  // const computedFields = computed<any>(() => {
+  //   return props.metadata
+  // })
+
+  // 初始化数据
+  const fields = ref<QueryFormField[]>([])
+  let initialValues = {}
+
+  watch(
+    () => props.metadata,
+    (metadata) => {
+      // 初始化数据
+      // 获取初始化数据
+    },
+    {
+      immediate: true,
+      deep: true,
+    },
+  )
+
+  // 查询
+  const handleConfirm = () => {
+    console.log('query => ', query.value)
+    emits('confirm', query.value)
+  }
+
+  // 重置
+  const handleReset = () => {
+    query.value = {}
+    handleConfirm()
+  }
 </script>
 
 <style lang="scss" scoped>
