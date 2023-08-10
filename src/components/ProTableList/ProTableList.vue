@@ -19,7 +19,6 @@
       :page-size="pageSize"
       :total="total"
       :page-sizes="[10, 20, 50, 100]"
-      :pager-count="5"
       @update:current-page="$emit('request', { pageIndex: $event })"
       @update:page-size="$emit('request', { pageSize: $event })"
     />
@@ -87,6 +86,7 @@
     padding: 0 16px;
   }
   .pro-table-pagination {
+    @extend %jcc;
     margin-top: 24px;
     padding: 0 16px;
   }
