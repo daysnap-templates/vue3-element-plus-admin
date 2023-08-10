@@ -3,7 +3,7 @@
     <template v-if="computedOneShowChild">
       <SidebarLink :to="resolvePath(computedOneShowChild.path)" v-if="computedOneShowChild.meta">
         <ElMenuItem :index="resolvePath(computedOneShowChild.path)">
-          <SidebarIcon :icon="computedOneShowChild.meta.icon" />
+          <SidebarIcon :icon="computedOneShowChild.meta.icon || item?.meta?.icon" />
           <template #title>
             {{ computedOneShowChild.meta.title }}
           </template>

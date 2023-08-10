@@ -19,7 +19,21 @@ export default [
       {
         path: 'dashboard',
         component: () => import('@/views/common/DashboardView.vue'),
-        meta: { title: '主页', icon: 'Basketball' },
+        meta: { title: '主页', icon: 'Odometer' },
+      },
+    ],
+  },
+
+  {
+    path: '/pro',
+    component: LayoutView,
+    redirect: '/pro/table',
+    meta: { title: 'Pro组件', icon: 'Grid' },
+    children: [
+      {
+        path: 'table',
+        component: () => import('@/views/common/ProTableView.vue'),
+        meta: { title: 'ProTable' },
       },
     ],
   },

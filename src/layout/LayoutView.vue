@@ -76,7 +76,7 @@
         @extend %pf;
         @extend %t0;
         @extend %l0;
-        z-index: 99;
+        z-index: 9999;
         width: $slidebar-width;
         transition: transform 0.3s;
       }
@@ -124,7 +124,7 @@
     @extend %r0;
     @extend %b0;
     @extend %dn;
-    z-index: 98;
+    z-index: 9998;
     background-color: rgb(0, 0, 0, 0.3);
   }
   .layout-inner {
