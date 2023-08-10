@@ -1,17 +1,55 @@
 <template>
   <div>
     <ProQueryForm :metadata="queryMetadata" @query="handleQuery" />
-    {{ query }}
+
+    <ProTable :data="tableData">
+      <template #actions>
+        <ElButton type="primary">新增</ElButton>
+        <ElButton type="danger">删除</ElButton>
+      </template>
+      <el-table-column prop="date" label="Date" />
+      <el-table-column prop="name" label="Name" />
+      <el-table-column prop="address" label="地址" />
+      <el-table-column fixed="right" label="操作" width="120">
+        <template #default>
+          <el-button link type="primary">详情</el-button>
+          <el-button link type="primary">编辑</el-button>
+        </template>
+      </el-table-column>
+    </ProTable>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { useQueryMetadata } from '@/hooks'
+  import { useQueryMetadata, useTablePaging } from '@/hooks'
 
   const handleQuery = (val: any) => {
     query.value = val
     console.log('val => ', val)
   }
+
+  const tableData = [
+    {
+      date: '2016-05-03',
+      name: 'Tom',
+      address: 'No. 189, Grove St, Los Angeles',
+    },
+    {
+      date: '2016-05-02',
+      name: 'Tom',
+      address: 'No. 189, Grove St, Los Angeles',
+    },
+    {
+      date: '2016-05-04',
+      name: 'Tom',
+      address: 'No. 189, Grove St, Los Angeles',
+    },
+    {
+      date: '2016-05-01',
+      name: 'Tom',
+      address: 'No. 189, Grove St, Los Angeles',
+    },
+  ]
 
   const [query, queryMetadata] = useQueryMetadata({
     x1: {
@@ -78,6 +116,17 @@
       },
     },
   })
+
+  const { pagingStatus } = useTablePaging(
+    async ([current, length]) => {
+      console.log('current', current)
+      console.log('length', length)
+      return [[], 10]
+    },
+    {
+      immediate: true,
+    },
+  )
 </script>
 
 <style lang="scss" scoped>
