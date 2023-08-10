@@ -1,11 +1,16 @@
 <template>
   <div class="pro-schema-query-form">
-    <div class="form-cell" v-for="item in fields" :key="item.key" :class="[item.is]">
+    <div
+      class="form-cell"
+      v-for="(item, key) in computedFields"
+      :key="item.key ?? key"
+      :class="[item.is]"
+    >
       <span class="form-cell-label" v-if="item.label">{{ item.label }}</span>
 
       <ElInput
         v-if="item.is === 'form-input'"
-        v-model="query[item.key]"
+        v-model="item.value"
         placeholder="请填写"
         clearable
         v-bind="item.props"
@@ -13,7 +18,7 @@
 
       <ElSelect
         v-else-if="item.is === 'form-select'"
-        v-model="query[item.key]"
+        v-model="item.value"
         placeholder="请选择"
         clearable
         v-bind="item.props"
@@ -28,7 +33,7 @@
       </ElSelect>
 
       <template v-else-if="item.is === 'form-radio'">
-        <ElRadioGroup v-model="query[item.key]">
+        <ElRadioGroup v-model="item.value">
           <ElRadio
             v-for="(option, index) in item.options"
             v-bind="option.props"
@@ -41,7 +46,7 @@
       </template>
 
       <template v-else-if="item.is === 'form-checkbox'">
-        <ElCheckboxGroup v-model="query[item.key]" v-bind="item.props">
+        <ElCheckboxGroup v-model="item.value" v-bind="item.props">
           <ElCheckbox
             v-for="(option, index) in item.options"
             v-bind="option.props"
@@ -55,7 +60,7 @@
 
       <ElDatePicker
         v-else-if="item.is === 'form-date-picker'"
-        v-model="query[item.key]"
+        v-model="item.value"
         type="date"
         placeholder="请选择"
         clearable
@@ -71,79 +76,48 @@
 </template>
 
 <script setup lang="ts">
-  import type { QueryFormField } from '@/types'
-  import {
-    isFunction,
-    isUndefined,
-    pick,
-    cloneSimple,
-    filterEmptyValue,
-    isEmptyObject,
-  } from '@daysnap/utils'
+  import type { QueryFormMetadata, QueryFormField, QueryFormMetadataObject } from '@/types'
+  import { banana } from '@daysnap/banana'
+  import { filterEmptyValue, isArray, isObject, isUndefined } from '@daysnap/utils'
   import type { PropType } from 'vue'
 
   const emits = defineEmits(['confirm', 'change'])
   const props = defineProps({
-    schema: { type: Array as PropType<QueryFormField[]>, default: () => [] },
+    metadata: {
+      type: [Array, Object] as PropType<QueryFormMetadata>,
+      default: () => [],
+    },
   })
 
-  const query = ref<Record<string, any>>({})
-
-  // 初始化数据
-  const fields = ref<QueryFormField[]>([])
-  let initialValues: Record<string, any>
-
-  watch(
-    () => query.value,
-    (nv, ov) => {
-      if (!isEmptyObject(ov)) {
-        emits('change', nv, ov)
-      }
-    },
-    {
-      immediate: false,
-      deep: true,
-    },
-  )
-
-  watch(
-    () => props.schema,
-    (schema) => {
-      const queryFormFields: QueryFormField[] = []
-      initialValues = {}
-      schema.forEach((item) => {
-        if (isFunction(item)) {
-          queryFormFields.push(...item(query.value))
-        } else {
-          queryFormFields.push(item)
-        }
-      })
-      const keys = queryFormFields.map((item) => {
-        const { key, initialValue } = item
-        if (!isUndefined(initialValue)) {
-          initialValues[key] = initialValue
-        }
-        return item.key
-      })
-      query.value = pick({ ...initialValues, ...filterEmptyValue(query.value) }, keys)
-      fields.value = queryFormFields
-    },
-    {
-      immediate: true,
-      deep: true,
-    },
-  )
+  const computedFields = computed(() => {
+    // todo 这里处理是否要隐藏的字段
+    // query 暂不处理
+    return props.metadata as QueryFormMetadataObject
+  })
 
   // 查询
   const handleConfirm = () => {
-    const value = cloneSimple(filterEmptyValue(query.value))
-    console.log('query => ', value)
+    const value = filterEmptyValue(banana.extract(computedFields.value), true)
     emits('confirm', value)
   }
 
   // 重置
   const handleReset = () => {
-    query.value = cloneSimple(initialValues)
+    const { metadata } = props
+    Object.keys(metadata).forEach((key: any) => {
+      const filed: QueryFormField = (metadata as any)[key]
+      let { value, defaultValue } = filed
+      if (!isUndefined(defaultValue)) {
+        value = defaultValue
+      } else if (isArray(value)) {
+        value = []
+      } else if (isObject(value)) {
+        value = {}
+      } else {
+        value = ''
+      }
+      filed.value = value
+    })
     handleConfirm()
   }
 </script>

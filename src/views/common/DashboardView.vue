@@ -1,22 +1,24 @@
 <template>
   <div>
-    <ProSchemaQueryForm :schema="querySchema" />
+    <ProSchemaQueryForm :metadata="queryMetadata" />
+
+    {{ queryMetadata }}
   </div>
 </template>
 
 <script setup lang="ts">
-  const querySchema = [
+  const queryMetadata = reactive([
     {
       key: 'x1',
       is: 'form-input',
-      initialValue: '1',
+      value: '1',
       placeholder: '请输入关键词检索',
       props: {},
     },
     {
       key: 'x2',
       is: 'form-select',
-      initialValue: '',
+      value: '',
       placeholder: '请选择年级',
       options: [
         { label: '一年级', value: 1 },
@@ -27,7 +29,7 @@
     {
       key: 'x3',
       is: 'form-radio',
-      initialValue: '',
+      value: '',
       label: '性别：',
       options: [
         { label: '男', value: 1 },
@@ -37,7 +39,7 @@
     {
       key: 'x4',
       is: 'form-checkbox',
-      initialValue: [],
+      value: [],
       label: '爱好：',
       options: [
         { label: '唱', value: 1 },
@@ -49,13 +51,13 @@
     {
       key: 'x5',
       is: 'form-date-picker',
-      initialValue: '',
+      value: '',
       placeholder: '请选择日期',
     },
     {
       key: 'x6',
       is: 'form-date-picker',
-      initialValue: '',
+      value: '',
       props: {
         type: 'daterange',
         startPlaceholder: '开始日期',
@@ -65,7 +67,7 @@
     {
       key: 'x7',
       is: 'form-date-picker',
-      initialValue: '',
+      value: '',
       placeholder: '请选择日期时间',
       props: {
         type: 'datetime',
@@ -74,14 +76,14 @@
     {
       key: 'x8',
       is: 'form-date-picker',
-      initialValue: '',
+      value: '',
       props: {
         type: 'datetimerange',
         startPlaceholder: '开始时间',
         endPlaceholder: '结束时间',
       },
     },
-  ]
+  ])
 </script>
 
 <style lang="scss" scoped>

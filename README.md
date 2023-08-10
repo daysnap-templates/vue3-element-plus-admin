@@ -25,6 +25,8 @@ npm install @types/nprogress -D
 
 npm install @daysnap/define-sass -D
 
+npm install @daysnap/banana -S
+
 npm install @daysnap/utils -S
 
 npm install path-to-regexp -S
