@@ -14,7 +14,7 @@ const errorHandler: AppConfig['errorHandler'] = (err) => {
 
   // development env 需要抛出异常 方便查看问题
   if (__DEV__) {
-    throw err
+    console.error(err)
   }
 }
 

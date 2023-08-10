@@ -1,11 +1,6 @@
 <template>
   <div class="pro-schema-query-form">
-    <div
-      class="form-cell"
-      v-for="(item, key) in computedFields"
-      :key="item.key ?? key"
-      :class="[item.is]"
-    >
+    <div class="form-cell" v-for="(item, key) in computedFields" :key="key" :class="[item.is]">
       <span class="form-cell-label" v-if="item.label">{{ item.label }}</span>
 
       <ElInput
@@ -69,43 +64,43 @@
     </div>
 
     <div class="form-cell">
-      <ElButton type="primary" plain icon="Search" @click="handleConfirm">查询</ElButton>
+      <ElButton type="primary" plain icon="Search" @click="handleQuery">查询</ElButton>
       <ElButton plain icon="RefreshRight" @click="handleReset">重置</ElButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import type { QueryFormMetadata, QueryFormField, QueryFormMetadataObject } from '@/types'
+  import type { QueryFormMetadata } from '@/types'
   import { banana } from '@daysnap/banana'
   import { filterEmptyValue, isArray, isObject, isUndefined } from '@daysnap/utils'
   import type { PropType } from 'vue'
 
-  const emits = defineEmits(['confirm', 'change'])
+  const emits = defineEmits(['query', 'reset'])
   const props = defineProps({
     metadata: {
-      type: [Array, Object] as PropType<QueryFormMetadata>,
-      default: () => [],
+      type: Object as PropType<QueryFormMetadata>,
+      default: () => ({}),
     },
   })
 
   const computedFields = computed(() => {
     // todo 这里处理是否要隐藏的字段
     // query 暂不处理
-    return props.metadata as QueryFormMetadataObject
+    return props.metadata
   })
 
   // 查询
-  const handleConfirm = () => {
+  const handleQuery = () => {
     const value = filterEmptyValue(banana.extract(computedFields.value), true)
-    emits('confirm', value)
+    emits('query', value)
   }
 
   // 重置
   const handleReset = () => {
     const { metadata } = props
-    Object.keys(metadata).forEach((key: any) => {
-      const filed: QueryFormField = (metadata as any)[key]
+    Object.keys(metadata).forEach((key) => {
+      const filed = metadata[key]
       let { value, defaultValue } = filed
       if (!isUndefined(defaultValue)) {
         value = defaultValue
@@ -118,7 +113,8 @@
       }
       filed.value = value
     })
-    handleConfirm()
+    emits('reset')
+    handleQuery()
   }
 </script>
 
