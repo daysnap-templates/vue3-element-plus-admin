@@ -1,23 +1,19 @@
 <template>
-  <div>
-    <ProQueryForm :metadata="queryMetadata" @query="handleQuery" />
-
-    <ProTableList v-bind="status" :data="data" @request="trigger">
-      <template #actions>
-        <ElButton type="primary">新增</ElButton>
-        <ElButton type="danger">删除</ElButton>
+  <ProTable>
+    <template #actions>
+      <ElButton type="primary">新增</ElButton>
+      <ElButton type="danger">删除</ElButton>
+    </template>
+    <el-table-column prop="date" label="Date" />
+    <el-table-column prop="name" label="Name" />
+    <el-table-column prop="address" label="地址" />
+    <el-table-column fixed="right" label="操作" width="120">
+      <template #default>
+        <el-button link type="primary">详情</el-button>
+        <el-button link type="primary">编辑</el-button>
       </template>
-      <el-table-column prop="date" label="Date" />
-      <el-table-column prop="name" label="Name" />
-      <el-table-column prop="address" label="地址" />
-      <el-table-column fixed="right" label="操作" width="120">
-        <template #default>
-          <el-button link type="primary">详情</el-button>
-          <el-button link type="primary">编辑</el-button>
-        </template>
-      </el-table-column>
-    </ProTableList>
-  </div>
+    </el-table-column>
+  </ProTable>
 </template>
 
 <script setup lang="ts">
