@@ -1,4 +1,4 @@
-import { isArray, isBoolean, isFunction, isObject, isString } from '@daysnap/utils'
+import { isNumber, isString } from '@daysnap/utils'
 
 export interface UseTablePagingStatus {
   pageIndex: number
@@ -15,19 +15,18 @@ export interface UseTablePagingTask<T = any> {
 export interface UseTablePagingOptions {
   initialStatus?: Partial<UseTablePagingStatus>
   immediate?: boolean
-  scrollSelector?: string
 }
 
 export function useTablePaging<T = any>(
   task: UseTablePagingTask<T>,
   options: UseTablePagingOptions = {},
 ) {
-  const { initialStatus, immediate, scrollSelector } = options
+  const { initialStatus, immediate } = options
 
   const status = reactive<UseTablePagingStatus>(
     Object.assign(
       {
-        pageIndex: 0,
+        pageIndex: 1,
         pageSize: 10,
         total: 0,
         loading: false,
@@ -36,50 +35,40 @@ export function useTablePaging<T = any>(
       initialStatus,
     ),
   )
-
-  // 滚动到顶部
-  const scrollTop = () => {
-    if (scrollSelector) {
-      // 重置
-      const els = document.querySelectorAll(scrollSelector)
-      const el = els[els.length - 1]
-      if (el) {
-        el.scrollTop = 0
-      }
-    }
-  }
-
   // 列表数据
   // https://github.com/vuejs/core/issues/2136
   const list = ref([]) as Ref<T[]>
 
-  const trigger = (pageIndex?: number, pageSize?: number) => {
-    const promise = task([pageIndex, pagingStatus.pagingSize]).then((res) => {
+  const trigger = (params: { pageIndex?: number; pageSize?: number } | number = {}) => {
+    if (isNumber(params)) {
+      params = { pageIndex: params }
+    }
+    const { pageIndex, pageSize } = Object.assign({}, status, params)
+
+    status.loading = true
+
+    const promise = task([pageIndex, pageSize]).then((res) => {
       const [data, total] = res
       list.value = data || []
       status.error = ''
-      status.pageIndex = pageIndex
       status.total = total
     })
 
     // error
     ;(promise.toast
       ? promise.toast((_, msg) => {
+          list.value = []
           status.error = msg
           return true
         })
       : promise.catch((err) => {
+          list.value = []
           status.error = isString(err) ? err : JSON.stringify(err)
         })
     ).finally(() => {
-      if (isFunction(options)) {
-        options(status.error)
-      }
-      // first page error
-      if (status.error) {
-        status.total = -1
-        list.value = []
-      }
+      status.pageIndex = pageIndex
+      status.pageSize = pageSize
+      status.loading = false
     })
   }
 

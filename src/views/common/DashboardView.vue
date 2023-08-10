@@ -2,7 +2,7 @@
   <div>
     <ProQueryForm :metadata="queryMetadata" @query="handleQuery" />
 
-    <ProTable :data="tableData">
+    <ProTable v-bind="status" :data="data" @request="trigger">
       <template #actions>
         <ElButton type="primary">新增</ElButton>
         <ElButton type="danger">删除</ElButton>
@@ -22,34 +22,12 @@
 
 <script setup lang="ts">
   import { useQueryMetadata, useTablePaging } from '@/hooks'
+  import { listGenerator, sleep } from '@daysnap/utils'
 
   const handleQuery = (val: any) => {
     query.value = val
-    console.log('val => ', val)
+    trigger(1)
   }
-
-  const tableData = [
-    {
-      date: '2016-05-03',
-      name: 'Tom',
-      address: 'No. 189, Grove St, Los Angeles',
-    },
-    {
-      date: '2016-05-02',
-      name: 'Tom',
-      address: 'No. 189, Grove St, Los Angeles',
-    },
-    {
-      date: '2016-05-04',
-      name: 'Tom',
-      address: 'No. 189, Grove St, Los Angeles',
-    },
-    {
-      date: '2016-05-01',
-      name: 'Tom',
-      address: 'No. 189, Grove St, Los Angeles',
-    },
-  ]
 
   const [query, queryMetadata] = useQueryMetadata({
     x1: {
@@ -117,11 +95,21 @@
     },
   })
 
-  const { pagingStatus } = useTablePaging(
+  const [status, data, trigger] = useTablePaging(
     async ([current, length]) => {
-      console.log('current', current)
-      console.log('length', length)
-      return [[], 10]
+      const options = Object.assign({}, query.value, { current, length })
+      console.log('query 查询参数', options)
+      await sleep(1000)
+
+      if (current === 2) {
+        throw '2312321'
+      }
+      const list = listGenerator(10, (index) => ({
+        date: '2016-05-01',
+        name: `Tom${index}`,
+        address: 'No. 189, Grove St, Los Angeles',
+      }))
+      return [list, 100]
     },
     {
       immediate: true,
@@ -131,6 +119,6 @@
 
 <style lang="scss" scoped>
   .view-wrap {
-    min-height: 200vh;
+    //
   }
 </style>

@@ -134,6 +134,7 @@
     @extend %pf;
     @extend %t0;
     @extend %r0;
+    z-index: 9;
     background-color: var(--ds-header-bg-color);
     box-shadow: 0 1px 4px rgb(0, 21, 41, 0.08);
   }
