@@ -1,5 +1,5 @@
 <template>
-  <div class="pro-schema-query-form">
+  <div class="pro-query-form">
     <div class="form-cell" v-for="(item, key) in computedFields" :key="key" :class="[item.is]">
       <span class="form-cell-label" v-if="item.label">{{ item.label }}</span>
 
@@ -120,7 +120,7 @@
 
 <style lang="scss" scoped>
   @import '@/assets/scss/define.scss';
-  .pro-schema-query-form {
+  .pro-query-form {
     @extend %df;
     @extend %fww;
     padding: 6px 16px 16px;

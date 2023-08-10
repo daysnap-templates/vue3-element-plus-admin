@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProSchemaQueryForm :metadata="queryMetadata" @query="handleQuery" />
+    <ProQueryForm :metadata="queryMetadata" @query="handleQuery" />
     {{ query }}
   </div>
 </template>
