@@ -115,6 +115,14 @@
           background-color: var(--el-sub-menu-hover-bg-color);
         }
       }
+      .el-sub-menu {
+        .el-sub-menu__title {
+          background-color: var(--el-sub-menu-bg-color);
+          &:hover {
+            background-color: var(--el-sub-menu-hover-bg-color);
+          }
+        }
+      }
     }
   }
   .layout-sidebar-mask {

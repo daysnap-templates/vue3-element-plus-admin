@@ -39,3 +39,12 @@ npm install screenfull -S
 ts type 
 
 `verbatimModuleSyntax`
+
+
+## Pro组件设计
+
+### ProQueryForm
+
+- 支持配置 `form` 表单
+- 传递值可以修改 form 值
+- 点了查询才会抛出查询填写的值
