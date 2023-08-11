@@ -27,7 +27,15 @@
   import SidebarCell from './SidebarCell.vue'
 
   const routes = useRouter().options.routes
-  const { collapse } = useMenuCollapse()
+  const { collapse, toggle } = useMenuCollapse()
+
+  const route = useRoute()
+  watch(
+    () => ({ ...route }),
+    () => {
+      toggle()
+    },
+  )
 
   const computedActiveMenu = computed(() => {
     const route = useRoute()
