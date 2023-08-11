@@ -24,11 +24,3 @@
     return char >= 'A' && char <= 'Z'
   })
 </script>
-
-<style lang="scss" scoped>
-  @import 'src/layout/styles/index';
-  .layout-icon {
-    // width: 20px;
-    // height: 20px;
-  }
-</style>
