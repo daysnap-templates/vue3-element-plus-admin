@@ -3,7 +3,7 @@
     <TransitionGroup name="layout-breadcrumb">
       <ElBreadcrumbItem
         v-for="(item, index) in computedList"
-        class="ds-bread-crumb-item"
+        class="layout-breadcrumb-item"
         :class="{
           'is-no-redirect': computedList.length - 1 === index,
         }"
@@ -45,8 +45,22 @@
   @import '@/layout/styles/define.scss';
   .layout-breadcrumb {
     padding: 0 10px;
-    &.is-no-redirect {
-      cursor: default;
+  }
+  .layout-breadcrumb-item {
+    @extend %cp;
+    font-weight: 500;
+    :deep {
+      &:hover {
+        .el-breadcrumb__inner {
+          color: var(--el-color-primary);
+        }
+      }
+      &.is-no-redirect {
+        cursor: default;
+        .el-breadcrumb__inner {
+          color: var(--el-text-color-regular);
+        }
+      }
     }
   }
   .layout-breadcrumb-enter-active {

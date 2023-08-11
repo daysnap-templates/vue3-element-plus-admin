@@ -76,7 +76,7 @@
         @extend %pf;
         @extend %t0;
         @extend %l0;
-        z-index: 99;
+        z-index: 9999;
         width: $slidebar-width;
         transition: transform 0.3s;
       }
@@ -115,6 +115,14 @@
           background-color: var(--el-sub-menu-hover-bg-color);
         }
       }
+      .el-sub-menu {
+        .el-sub-menu__title {
+          background-color: var(--el-sub-menu-bg-color);
+          &:hover {
+            background-color: var(--el-sub-menu-hover-bg-color);
+          }
+        }
+      }
     }
   }
   .layout-sidebar-mask {
@@ -124,7 +132,7 @@
     @extend %r0;
     @extend %b0;
     @extend %dn;
-    z-index: 98;
+    z-index: 9998;
     background-color: rgb(0, 0, 0, 0.3);
   }
   .layout-inner {
@@ -134,6 +142,7 @@
     @extend %pf;
     @extend %t0;
     @extend %r0;
+    z-index: 9;
     background-color: var(--ds-header-bg-color);
     box-shadow: 0 1px 4px rgb(0, 21, 41, 0.08);
   }

@@ -12,7 +12,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@daysnap/utils": "^0.0.59",
+    "@daysnap/banana": "^0.0.15",
+    "@daysnap/utils": "^0.0.62",
     "@element-plus/icons": "^0.0.11",
     "axios": "^1.4.0",
     "element-plus": "^2.3.9",

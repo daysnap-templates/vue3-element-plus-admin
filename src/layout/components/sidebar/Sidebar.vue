@@ -22,12 +22,22 @@
 </template>
 
 <script setup lang="ts">
-  import { useMenuCollapse } from '@/layout/hooks'
+  import { PLATFORM, useMenuCollapse } from '@/layout/hooks'
   import SidebarLogo from './SidebarLogo.vue'
   import SidebarCell from './SidebarCell.vue'
 
   const routes = useRouter().options.routes
-  const { collapse } = useMenuCollapse()
+  const { collapse, toggle, platform } = useMenuCollapse()
+
+  const route = useRoute()
+  watch(
+    () => ({ ...route }),
+    () => {
+      if (platform.value === PLATFORM.MOBILE) {
+        toggle()
+      }
+    },
+  )
 
   const computedActiveMenu = computed(() => {
     const route = useRoute()
