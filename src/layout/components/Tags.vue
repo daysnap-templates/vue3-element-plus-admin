@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-tags">
+  <div class="layout-tags" ref="refTags">
     <ElTabs
       type="card"
       class="layout-tags-tabs"
@@ -10,9 +10,9 @@
     >
       <ElTabPane v-for="item in visitedTags" :key="item.path" :name="item.path">
         <template #label>
-          <span @contextmenu.prevent="handleContextmenu(item, $event)">{{
-            item?.meta?.title
-          }}</span>
+          <span @contextmenu.prevent="handleContextmenu(item, $event)">
+            {{ item?.meta?.title }}
+          </span>
         </template>
       </ElTabPane>
     </ElTabs>
@@ -37,6 +37,7 @@
   const position = reactive({ left: 0, top: 0, visible: false })
   const refTags = ref<HTMLElement>()
   const selectedTag = ref<RouteLocationNormalizedLoaded>()
+
   const handleContextmenu = (tag: RouteLocationNormalizedLoaded, event: MouseEvent) => {
     selectedTag.value = tag
     if (refTags.value) {

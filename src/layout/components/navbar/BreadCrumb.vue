@@ -51,7 +51,6 @@
     font-weight: 500;
     :deep {
       &:hover {
-        // --el-text-color-regular: var(--el-color-primary);
         .el-breadcrumb__inner {
           color: var(--el-color-primary);
         }
