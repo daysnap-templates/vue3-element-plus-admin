@@ -29,6 +29,8 @@ coverage
 
 # lock
 package-lock.json
+pnpm-lock.yaml
+
 
 # auto .d.ts
 auto-imports.d.ts
