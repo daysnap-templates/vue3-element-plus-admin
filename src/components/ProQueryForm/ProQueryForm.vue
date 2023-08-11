@@ -91,8 +91,8 @@
   })
 
   const computedFields = computed(() => {
-    // todo 这里处理是否要隐藏的字段
-    // query 暂不处理
+    // todo 这里可以过滤需要隐藏的字段
+    // 但是因为是查询 query 暂不处理
     return props.metadata
   })
 
