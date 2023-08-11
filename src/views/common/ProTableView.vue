@@ -1,9 +1,5 @@
 <template>
-  <ProTable>
-    <template #actions>
-      <ElButton type="primary">新增</ElButton>
-      <ElButton type="danger">删除</ElButton>
-    </template>
+  <ProTable :metadata="metadata">
     <el-table-column prop="date" label="Date" />
     <el-table-column prop="name" label="Name" />
     <el-table-column prop="address" label="地址" />
@@ -17,15 +13,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useQueryMetadata, useTablePaging } from '@/hooks'
-  import { listGenerator, sleep } from '@daysnap/utils'
-
-  const handleQuery = (val: any) => {
-    query.value = val
-    trigger(1)
-  }
-
-  const [query, queryMetadata] = useQueryMetadata({
+  const metadata = reactive({
     x1: {
       is: 'form-input',
       value: '1',
@@ -90,27 +78,6 @@
       },
     },
   })
-
-  const [status, data, trigger] = useTablePaging(
-    async ([current, length]) => {
-      const options = Object.assign({}, query.value, { current, length })
-      console.log('query 查询参数', options)
-      await sleep(1000)
-
-      if (current === 2) {
-        throw '2312321'
-      }
-      const list = listGenerator(10, (index) => ({
-        date: '2016-05-01',
-        name: `Tom${index}`,
-        address: 'No. 189, Grove St, Los Angeles',
-      }))
-      return [list, 100]
-    },
-    {
-      immediate: true,
-    },
-  )
 </script>
 
 <style lang="scss" scoped>

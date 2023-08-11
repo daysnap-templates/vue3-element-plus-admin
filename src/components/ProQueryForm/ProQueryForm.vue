@@ -64,8 +64,10 @@
     </div>
 
     <div class="form-cell">
-      <ElButton type="primary" plain icon="Search" @click="handleQuery">查询</ElButton>
-      <ElButton plain icon="RefreshRight" @click="handleReset">重置</ElButton>
+      <ElButton type="primary" icon="Search" :loading="loading" @click="handleQuery">
+        查询
+      </ElButton>
+      <ElButton icon="RefreshRight" @click="handleReset">重置</ElButton>
     </div>
   </div>
 </template>
@@ -81,6 +83,10 @@
     metadata: {
       type: Object as PropType<QueryFormMetadata>,
       default: () => ({}),
+    },
+    loading: {
+      type: Boolean,
+      default: false,
     },
   })
 

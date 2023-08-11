@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProQueryForm :metadata="queryMetadata" @query="handleQuery" />
+    <ProQueryForm :metadata="queryMetadata" :loading="status.loading" @query="handleQuery" />
 
     <ProTableList v-bind="status" :data="data" @request="trigger">
       <template #actions>
