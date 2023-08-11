@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pro-table">
     <ProQueryForm
       v-if="metadata"
       :metadata="metadata"
@@ -54,4 +54,38 @@
 
 <style lang="scss" scoped>
   @import '@/assets/scss/define.scss';
+  .pro-table {
+    @extend %df;
+    @extend %fdc;
+    min-height: calc(100vh - var(--ds-navbar-height) - 37px - 32px);
+    :deep {
+      .pro-table-list {
+        @extend %df1;
+        @extend %df;
+        @extend %fdc;
+      }
+      // 解决 table 希望尽量撑满一屏
+      .el-scrollbar__view {
+        display: inline-flex !important;
+      }
+      .el-scrollbar__view,
+      .el-scrollbar__wrap,
+      .el-table__body-wrapper,
+      .el-scrollbar,
+      .pro-table-content,
+      .el-table,
+      .el-table__inner-wrapper {
+        @extend %df1;
+        @extend %df;
+        @extend %fdc;
+      }
+      .el-table__empty-block {
+        @extend %df;
+        @extend %fdc;
+        @extend %df1;
+        @extend %aic;
+        @extend %jcc;
+      }
+    }
+  }
 </style>

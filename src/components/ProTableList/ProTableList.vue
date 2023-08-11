@@ -63,7 +63,7 @@
     border-radius: 4px;
     background-color: #fff;
     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.05);
-    padding: 16px 0 24px;
+    padding: 16px 0;
     :deep {
       .el-table {
         --el-table-bg-color: transparent;
