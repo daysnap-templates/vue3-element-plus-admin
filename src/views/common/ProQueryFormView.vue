@@ -1,13 +1,20 @@
 <template>
-  <ProQueryForm :metadata="metadata" />
+  <ProQueryForm :metadata="metadata" @query="query = $event" />
 
   <ElButton @click="handleGetOptions">获取爱好选项</ElButton>
 
-  <p style="padding: 16px 0">{{ metadata }}</p>
+  <dl style="padding: 16px 0">
+    <dt>搜索的值：</dt>
+    <dd>{{ query }}</dd>
+    <dt>表单项值：</dt>
+    <dd>{{ metadata }}</dd>
+  </dl>
 </template>
 
 <script setup lang="ts">
-  const metadata = reactive({
+  import { useQueryMetadata } from '@/hooks'
+
+  const [query, metadata] = useQueryMetadata({
     x1: {
       is: 'form-input',
       value: '1',

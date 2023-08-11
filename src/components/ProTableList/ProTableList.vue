@@ -3,6 +3,9 @@
     <div class="pro-table-header">
       <h2>{{ title }}</h2>
       <div class="pro-table-actions">
+        <ElButton plain icon="RefreshRight" :loading="loading" @click="$emit('request', {})">
+          刷新
+        </ElButton>
         <slot name="actions"></slot>
       </div>
     </div>
@@ -20,7 +23,7 @@
       :total="total"
       :page-sizes="[10, 20, 50, 100]"
       @update:current-page="$emit('request', { pageIndex: $event })"
-      @update:page-size="$emit('request', { pageSize: $event })"
+      @update:page-size="$emit('request', { pageSize: $event, pageIndex: 1 })"
     />
   </div>
 </template>
