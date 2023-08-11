@@ -7,10 +7,9 @@
       @query="handleQuery"
     />
 
-    <ProTableList>
+    <ProTableList v-bind="status" :data="data" @request="reqTableList">
       <template #actions>
-        <ElButton type="primary">新增</ElButton>
-        <ElButton type="danger">删除</ElButton>
+        <ElButton type="primary" plain icon="Plus">新增</ElButton>
       </template>
       <slot></slot>
     </ProTableList>
@@ -18,8 +17,11 @@
 </template>
 
 <script setup lang="ts">
-  import { useQueryMetadata, useTablePaging, type UseTablePagingTask } from '@/hooks'
+  import { useTablePaging } from '@/hooks'
   import type { QueryFormMetadata } from '@/types'
+  import type { ProTableRequest } from './types'
+  import { filterEmptyValue } from '@daysnap/utils'
+  import { banana } from '@daysnap/banana'
 
   const props = defineProps({
     metadata: {
@@ -27,30 +29,22 @@
       default: () => ({}),
     },
     request: {
-      type: Function as PropType<
-        (state: [number, number], query: Record<string, any>) => Promise<[any[], number]>
-      >,
+      type: Function as PropType<ProTableRequest>,
       required: true,
     },
   })
 
-  const queryMetadata = ref<QueryFormMetadata>({})
+  // eslint-disable-next-line vue/no-setup-props-destructure
+  const query = ref(filterEmptyValue(banana.extract(props.metadata), true))
 
-  watch(
-    () => props.metadata,
-    () => {
-      //
-    },
-    { immediate: true, deep: true },
-  )
+  const handleQuery = (val: Record<string, any>) => {
+    query.value = val
+    reqTableList(1)
+  }
 
-  const [] = useQueryMetadata(props.metadata)
-
-  const handleQuery = (val: Record<string, any>) => {}
-
-  const [status, data, trigger] = useTablePaging(
-    async (state) => {
-      return props.request(state, {})
+  const [status, data, reqTableList] = useTablePaging(
+    (state) => {
+      return props.request(state, query.value)
     },
     {
       immediate: true,

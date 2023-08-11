@@ -34,7 +34,6 @@
       value: '',
       label: '性别：',
       options: [
-        { label: '全部', value: '' },
         { label: '男', value: 1 },
         { label: '女', value: 2 },
       ],
@@ -49,6 +48,35 @@
         { label: 'Rap', value: 3 },
         { label: '🏀', value: 4 },
       ],
+    },
+    x5: {
+      is: 'form-date-picker',
+      value: '',
+    },
+    x6: {
+      is: 'form-date-picker',
+      value: '',
+      props: {
+        type: 'daterange',
+        startPlaceholder: '开始日期',
+        endPlaceholder: '结束日期',
+      },
+    },
+    x7: {
+      is: 'form-date-picker',
+      value: '',
+      props: {
+        type: 'datetime',
+      },
+    },
+    x8: {
+      is: 'form-date-picker',
+      value: '',
+      props: {
+        type: 'datetimerange',
+        startPlaceholder: '开始时间',
+        endPlaceholder: '结束时间',
+      },
     },
   })
 

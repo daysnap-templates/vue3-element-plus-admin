@@ -4,8 +4,8 @@
       <ElButton plain type="primary" icon="Plus">新增</ElButton>
       <ElButton plain type="primary" icon="Download">导出</ElButton>
     </template>
-    <el-table-column prop="date" label="Date" />
-    <el-table-column prop="name" label="Name" />
+    <el-table-column prop="date" label="日期" />
+    <el-table-column prop="name" label="姓名" />
     <el-table-column prop="address" label="地址" />
     <el-table-column fixed="right" label="操作" width="120">
       <template #default>
