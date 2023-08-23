@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -14,7 +14,7 @@
   "dependencies": {
     "@daysnap/banana": "^0.0.15",
     "@daysnap/utils": "^0.0.62",
-    "@element-plus/icons": "^0.0.11",
+    "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.9",
     "nprogress": "^0.2.0",

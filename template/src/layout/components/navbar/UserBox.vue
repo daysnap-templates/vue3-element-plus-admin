@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-  import { CaretBottom } from '@element-plus/icons'
+  import { CaretBottom } from '@element-plus/icons-vue'
 
   const router = useRouter()
 
