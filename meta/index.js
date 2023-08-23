@@ -17,11 +17,6 @@ module.exports = {
           },
           {
               type: 'string',
-              name: 'appid',
-              message: '小程序的appid',
-          },
-          {
-              type: 'string',
               name: 'projectName',
               message: '小程序名字',
           },
@@ -40,22 +35,6 @@ module.exports = {
       ])
   },
 
-  // 配置过滤文件的方式 2种
-  // configureFilter ({ minimatch, files, metalsmith }) {
-  //   const fileNames = Object.keys(files)
-  //   const { lintConfig } = metalsmith.metadata()
-  //   fileNames.forEach((file) => {
-  //     if (minimatch(file, '.eslintrc.js', { dot: true })) {
-  //       if (!lintConfig.includes('eslint')) {
-  //         delete files[file]
-  //       }
-  //     }
-  //   })
-  // }
-  // configureFilter: {
-  //     '.eslintrc.js': 'lintConfig.includes("eslint")',
-  // },
-
   // 完成
   complete: (data, {chalk}) => {
       const message = `
@@ -66,7 +45,7 @@ ${chalk.yellow(
           `${data.inPlace ? '' : `cd ${data.destDirName}\n  `}npm install\n  npm run dev`
       )}
 
-相关文档可以查看： https://github.com/daysnap
+相关文档可以查看： https://github.com/daysnap-templates/vue3-element-plus-admin
 `
       console.log(message)
   }
