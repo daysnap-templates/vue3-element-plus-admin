@@ -17,11 +17,6 @@ module.exports = {
           },
           {
               type: 'string',
-              name: 'projectName',
-              message: '小程序名字',
-          },
-          {
-              type: 'string',
               name: 'author',
               message: "作者",
               default: author,
