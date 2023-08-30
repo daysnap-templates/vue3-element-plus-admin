@@ -1,8 +1,6 @@
 <template>
   <ProQueryForm :metadata="metadata" @query="query = $event" />
-
   <ElButton @click="handleGetOptions">获取爱好选项</ElButton>
-
   <dl style="padding: 16px 0">
     <dt>搜索的值：</dt>
     <dd>{{ query }}</dd>
@@ -10,10 +8,8 @@
     <dd>{{ metadata }}</dd>
   </dl>
 </template>
-
 <script setup lang="ts">
   import { useQueryMetadata } from '@/hooks'
-
   const [query, metadata] = useQueryMetadata({
     x1: {
       is: 'form-input',
@@ -79,7 +75,6 @@
       },
     },
   })
-
   const handleGetOptions = async () => {
     return (metadata.x4.options = [
       { label: '唱', value: 1 },

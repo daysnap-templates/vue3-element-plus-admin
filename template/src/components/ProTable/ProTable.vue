@@ -1,15 +1,15 @@
 <template>
   <div class="pro-table">
     <ProQueryForm
-      v-if="metadata"
-      :metadata="metadata"
+      v-if="queryMetadata"
+      :metadata="queryMetadata"
       :loading="status.loading"
       @query="handleQuery"
     />
 
     <ProTableList v-bind="status" :data="data" @request="reqTableList">
       <template #actions>
-        <ElButton type="primary" plain icon="Plus">新增</ElButton>
+        <slot name="actions"> </slot>
       </template>
       <slot></slot>
     </ProTableList>
@@ -18,24 +18,14 @@
 
 <script setup lang="ts">
   import { useTablePaging } from '@/hooks'
-  import type { QueryFormMetadata } from '@/types'
-  import type { ProTableRequest } from './types'
   import { filterEmptyValue } from '@daysnap/utils'
   import { banana } from '@daysnap/banana'
+  import { proTableProps } from './types'
 
-  const props = defineProps({
-    metadata: {
-      type: Object as PropType<QueryFormMetadata>,
-      default: () => ({}),
-    },
-    request: {
-      type: Function as PropType<ProTableRequest>,
-      required: true,
-    },
-  })
+  const props = defineProps(proTableProps)
 
   // eslint-disable-next-line vue/no-setup-props-destructure
-  const query = ref(filterEmptyValue(banana.extract(props.metadata), true))
+  const query = ref(filterEmptyValue(banana.extract(props.queryMetadata), true))
 
   const handleQuery = (val: Record<string, any>) => {
     query.value = val
@@ -44,12 +34,16 @@
 
   const [status, data, reqTableList] = useTablePaging(
     (state) => {
-      return props.request(state, query.value)
+      return props.request!(state, query.value)
     },
     {
       immediate: true,
     },
   )
+
+  defineExpose({
+    reload: () => reqTableList(1),
+  })
 </script>
 
 <style lang="scss" scoped>

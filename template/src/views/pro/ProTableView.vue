@@ -1,13 +1,13 @@
 <template>
-  <ProTable :request="handleRequest" :metadata="metadata">
-    <el-table-column prop="name" label="姓名" />
-    <el-table-column prop="address" label="地址" />
-    <el-table-column fixed="right" label="操作" width="120">
+  <ProTable :request="handleRequest" :query-metadata="queryMetadata">
+    <ElTableColumn prop="name" label="姓名" />
+    <ElTableColumn prop="address" label="地址" />
+    <ElTableColumn fixed="right" label="操作" width="120">
       <template #default>
-        <el-button link type="primary">详情</el-button>
-        <el-button link type="primary">编辑</el-button>
+        <ElButton link type="primary">详情</ElButton>
+        <ElButton link type="primary">编辑</ElButton>
       </template>
-    </el-table-column>
+    </ElTableColumn>
   </ProTable>
 </template>
 
@@ -15,7 +15,7 @@
   import type { ProTableRequest } from '@/components/ProTable'
   import { listGenerator, sleep } from '@daysnap/utils'
 
-  const metadata = reactive({
+  const queryMetadata = reactive({
     x1: {
       is: 'form-input',
       value: '1',
