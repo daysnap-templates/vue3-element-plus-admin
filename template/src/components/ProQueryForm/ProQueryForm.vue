@@ -2,7 +2,6 @@
   <div class="pro-query-form">
     <div class="form-cell" v-for="(item, key) in computedFields" :key="key" :class="[item.is]">
       <span class="form-cell-label" v-if="item.label">{{ item.label }}</span>
-
       <ElInput
         v-if="item.is === 'form-input'"
         v-model="item.value"
@@ -10,7 +9,6 @@
         clearable
         v-bind="item.props"
       />
-
       <ElSelect
         v-else-if="item.is === 'form-select'"
         v-model="item.value"
@@ -26,7 +24,6 @@
           :value="option.value"
         />
       </ElSelect>
-
       <template v-else-if="item.is === 'form-radio'">
         <ElRadioGroup v-model="item.value">
           <ElRadio
@@ -39,7 +36,6 @@
           </ElRadio>
         </ElRadioGroup>
       </template>
-
       <template v-else-if="item.is === 'form-checkbox'">
         <ElCheckboxGroup v-model="item.value" v-bind="item.props">
           <ElCheckbox
@@ -52,7 +48,6 @@
           </ElCheckbox>
         </ElCheckboxGroup>
       </template>
-
       <ElDatePicker
         v-else-if="item.is === 'form-date-picker'"
         v-model="item.value"
@@ -73,22 +68,12 @@
 </template>
 
 <script setup lang="ts">
-  import type { QueryFormMetadata } from '@/types'
   import { banana } from '@daysnap/banana'
   import { filterEmptyValue, isArray, isObject, isUndefined } from '@daysnap/utils'
-  import type { PropType } from 'vue'
+  import { proQueryFormProps } from './types'
 
   const emits = defineEmits(['query', 'reset'])
-  const props = defineProps({
-    metadata: {
-      type: Object as PropType<QueryFormMetadata>,
-      default: () => ({}),
-    },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-  })
+  const props = defineProps(proQueryFormProps)
 
   const computedFields = computed(() => {
     // todo 这里可以过滤需要隐藏的字段

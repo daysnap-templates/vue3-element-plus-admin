@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@daysnap/banana": "^0.0.15",
+    "@daysnap/horn-use": "^0.0.16",
     "@daysnap/utils": "^0.0.62",
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@daysnap/define-sass": "^0.0.18",
+    "@daysnap/types": "^0.0.3",
     "@rushstack/eslint-patch": "^1.3.2",
     "@tsconfig/node18": "^18.2.0",
     "@types/node": "^18.17.0",

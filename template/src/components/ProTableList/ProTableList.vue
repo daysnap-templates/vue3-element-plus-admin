@@ -27,7 +27,6 @@
     />
   </div>
 </template>
-
 <script setup lang="ts">
   defineEmits(['request'])
 
@@ -56,7 +55,6 @@
     },
   })
 </script>
-
 <style lang="scss" scoped>
   @import '@/assets/scss/define.scss';
   .pro-table-list {
