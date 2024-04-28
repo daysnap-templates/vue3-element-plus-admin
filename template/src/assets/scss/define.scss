@@ -1,1 +1,13 @@
 @import '@daysnap/define-sass';
+
+$color-primary: var(--el-color-primary);
+
+@mixin meta($block, $w: 768px) {
+  @at-root {
+    @media screen and (max-width: $w) {
+      .#{$block} {
+        @content;
+      }
+    }
+  }
+}

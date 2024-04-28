@@ -65,5 +65,58 @@
   }
   .layout-sidebar-inner {
     @extend %df1;
+
+    --el-menu-item-height: 40px;
+    --el-menu-sub-item-height: 40px;
+
+    --el-menu-base-level-padding: 8px;
+    --el-menu-level-padding: 18px;
+    --el-menu-text-color: #4e5969;
+
+    --el-menu-icon-margin-right: 6px;
+
+    :deep {
+      .el-icon {
+        margin-right: var(--el-menu-icon-margin-right);
+      }
+      .el-sub-menu {
+        margin-top: j(4);
+        &.is-active {
+          .el-sub-menu__title {
+            font-weight: 500;
+            color: $color-primary;
+          }
+        }
+      }
+      .el-menu-item {
+        margin-top: j(4);
+        &.is-active {
+          font-weight: 500;
+          background-color: var(--el-menu-hover-bg-color);
+        }
+      }
+      .el-sub-menu {
+        .el-menu-item {
+          padding-left: calc(
+            var(--el-menu-icon-width) + var(--el-menu-level) * var(--el-menu-level-padding) - var(
+                --el-menu-icon-margin-right
+              )
+          );
+        }
+      }
+      &.el-menu--collapse {
+        width: auto;
+        padding: 0;
+        --el-menu-base-level-padding: 0;
+        --el-menu-level-padding: 0;
+        .el-icon {
+          margin-right: 0;
+        }
+        .el-sub-menu__title,
+        .el-menu-tooltip__trigger {
+          padding-left: j(12);
+        }
+      }
+    }
   }
 </style>

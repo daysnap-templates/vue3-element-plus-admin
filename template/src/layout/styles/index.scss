@@ -1,6 +1,16 @@
 @import 'define.scss';
 
 :root {
+
+  --ly-min-width: 1000px;
+
+  // navbar
+  --ly-navbar-height: 50px;
+
+  // slidebar
+  --ly-slidebar-width: 200px;
+  --ly-slidebar-collapse-width: 48px;
+
   // navbar
   --ds-navbar-height: 50px;
 

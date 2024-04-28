@@ -29,7 +29,7 @@
   .layout-sidebar-logo {
     @extend %pr;
     @extend %oh;
-    height: $navbar-height;
+    height: var(--ds-navbar-height);
     background-color: var(--ds-slidebar-logo-bg-color);
     img {
       width: 30px;
