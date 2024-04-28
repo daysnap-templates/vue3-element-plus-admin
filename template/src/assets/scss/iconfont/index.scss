@@ -1,0 +1,17 @@
+@import 'iconfont.scss';
+
+@font-face {
+  font-family: 'iconfont';
+  src:
+    url('@/assets/scss/iconfont/iconfont.woff2?t=1713318919861') format('woff2'),
+    url('@/assets/scss/iconfont/iconfont.woff?t=1713318919861') format('woff'),
+    url('@/assets/scss/iconfont/iconfont.ttf?t=1713318919861') format('truetype');
+}
+
+.iconfont {
+  position: relative;
+  display: inline-block;
+  font: normal normal normal 14px/1 'iconfont';
+  font-size: inherit;
+  text-rendering: auto;
+}

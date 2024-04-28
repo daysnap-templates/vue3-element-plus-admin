@@ -62,10 +62,15 @@
     @extend %b0;
     @extend %df;
     @extend %fdc;
+    @extend %usn;
+    background-color: #fff;
   }
   .layout-sidebar-inner {
     @extend %df1;
-
+  }
+  .layout-sidebar-menu {
+    border-right: none;
+    padding: 0 j(8);
     --el-menu-item-height: 40px;
     --el-menu-sub-item-height: 40px;
 
@@ -96,6 +101,7 @@
         }
       }
       .el-sub-menu {
+        .el-sub-menu__title,
         .el-menu-item {
           padding-left: calc(
             var(--el-menu-icon-width) + var(--el-menu-level) * var(--el-menu-level-padding) - var(

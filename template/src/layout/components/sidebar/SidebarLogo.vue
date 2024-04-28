@@ -29,8 +29,7 @@
   .layout-sidebar-logo {
     @extend %pr;
     @extend %oh;
-    height: var(--ds-navbar-height);
-    background-color: var(--ds-slidebar-logo-bg-color);
+    height: var(--ly-navbar-height);
     img {
       width: 30px;
       height: 30px;
@@ -43,9 +42,9 @@
       @extend %pr;
       @extend %w100;
       @extend %wsn;
+      @extend %c3;
       font-size: 14px;
       font-weight: 600;
-      color: var(--ds-slidebar-logo-text-color);
 
       &.is-collapse {
         span {

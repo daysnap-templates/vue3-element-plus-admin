@@ -1,0 +1,35 @@
+.el-table__expanded-cell {
+  padding: 10px 32px !important;
+  .el-row {
+    font-size: 12px;
+    word-break: break-all;
+  }
+  .el-col {
+    display: flex;
+    padding: 5px 0;
+    span {
+      &:nth-child(1) {
+        color: #999;
+        &::after {
+          content: '：';
+        }
+      }
+      &:nth-child(2) {
+        color: #333;
+      }
+      .el-image {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+      }
+      a {
+        display: block;
+      }
+    }
+    a {
+      cursor: pointer;
+      text-decoration: underline;
+      color: #134eff;
+    }
+  }
+}

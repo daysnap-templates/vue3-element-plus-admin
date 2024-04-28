@@ -5,7 +5,7 @@
         <ElMenuItem :index="resolvePath(computedOneShowChild.path)">
           <ProIcon
             v-if="computedOneShowChild.meta.icon || item?.meta?.icon"
-            :icon="computedOneShowChild.meta.icon || item?.meta?.icon"
+            :name="computedOneShowChild.meta.icon || item?.meta?.icon"
           />
           <template #title>
             {{ computedOneShowChild.meta.title }}
@@ -15,7 +15,7 @@
     </template>
     <ElSubMenu v-else :index="resolvePath(item.path)">
       <template #title v-if="item.meta">
-        <ProIcon v-if="item.meta.icon" :icon="item.meta.icon" />
+        <ProIcon v-if="item.meta.icon" :name="item.meta.icon" />
         <span>{{ item.meta.title }}</span>
       </template>
       <SidebarCell

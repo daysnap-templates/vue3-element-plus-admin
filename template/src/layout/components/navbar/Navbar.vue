@@ -22,7 +22,7 @@
   .layout-navbar {
     @extend %df;
     @extend %aic;
-    height: var(--ds-navbar-height);
+    height: var(--ly-navbar-height);
   }
   .layout-breadcrumb {
     margin-right: auto;

@@ -17,12 +17,12 @@ export default defineRoutes([
         path: '/todo/list',
         name: 'TodoListView',
         component: () => import('@/views/todo/todo-list/TodoListView.vue'),
-        meta: { title: 'TODO列表', icon: 'HelpFilled' },
+        meta: { title: 'TODO列表' },
       },
       {
         path: '/todo/list/2',
         component: RouterView,
-        meta: { title: '一级菜单', icon: 'HelpFilled' },
+        meta: { title: '一级菜单' },
         children: [
           {
             path: '/todo/list/2',
