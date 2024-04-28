@@ -1,5 +1,6 @@
-import np from 'nprogress'
 import 'nprogress/nprogress.css'
+
+import np from 'nprogress'
 
 np.configure({
   showSpinner: false,

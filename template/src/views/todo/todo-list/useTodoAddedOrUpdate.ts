@@ -27,7 +27,6 @@ export const useTodoAddedOrUpdate = createProDialogForm(
     },
   }),
   async (metadata, instance, item) => {
-    console.log(item, 'item')
     await instance.value.show({
       title: item ? '编辑' : '新增',
       metadata,

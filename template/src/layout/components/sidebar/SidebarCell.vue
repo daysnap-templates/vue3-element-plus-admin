@@ -30,9 +30,11 @@
 
 <script setup lang="ts">
   import type { RouteRecordRaw } from 'vue-router'
+
   import { isExternal, resolve } from '@/layout/utils'
-  import SidebarLink from './SidebarLink.vue'
+
   import SidebarIcon from './SidebarIcon.vue'
+  import SidebarLink from './SidebarLink.vue'
 
   const props = defineProps<{
     item: RouteRecordRaw

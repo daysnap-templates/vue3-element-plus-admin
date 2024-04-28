@@ -1,14 +1,36 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.__BASE__ || '/',
+
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+
+  // dev server
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'https://rich.hjbxjz.com',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, ''),
+  //       headers: {
+  //         referer: 'https://m.hjbxjz.com',
+  //       },
+  //     },
+  //   },
+  // },
+
   plugins: [
     vue(),
     vueJsx(),
@@ -22,13 +44,8 @@ export default defineConfig({
     }),
     Components({
       dts: 'typings/components.d.ts',
-      // extensions: ['ts', 'jsx', 'tsx', 'js', 'vue'],
+      extensions: ['ts', 'jsx', 'tsx', 'js', 'vue'],
       resolvers: [ElementPlusResolver()],
     }),
   ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
 })

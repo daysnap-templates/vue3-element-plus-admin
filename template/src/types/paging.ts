@@ -1,9 +1,9 @@
 export type PagingParams<T = unknown> = {
-  PageIndex: number
-  PageSize: number
+  pageIndex: number
+  pageSize: number
 } & T
 
 export interface PagingResult<T = any> {
-  Count: number
-  Data: T[]
+  total: number
+  data: T[]
 }

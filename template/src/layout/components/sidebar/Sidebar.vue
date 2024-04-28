@@ -23,8 +23,9 @@
 
 <script setup lang="ts">
   import { PLATFORM, useMenuCollapse } from '@/layout/hooks'
-  import SidebarLogo from './SidebarLogo.vue'
+
   import SidebarCell from './SidebarCell.vue'
+  import SidebarLogo from './SidebarLogo.vue'
 
   const routes = useRouter().options.routes
   const { collapse, toggle, platform } = useMenuCollapse()

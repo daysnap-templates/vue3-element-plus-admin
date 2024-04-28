@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-  import screenfull from 'screenfull'
   import { FullScreen } from '@element-plus/icons-vue'
+  import screenfull from 'screenfull'
 
   const isFullscreen = ref(false)
 

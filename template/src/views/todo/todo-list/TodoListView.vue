@@ -8,9 +8,7 @@
 
     <ProTableActionsColumn>
       <template #default="scope">
-        <ProTableActionButton @click="handleDelete" :pd="PD.syp.auction.edit">
-          删除
-        </ProTableActionButton>
+        <ProTableActionButton @click="handleDelete"> 删除 </ProTableActionButton>
         <ProTableActionButton @click="handleAddedOrUpdate(scope.row)">编辑</ProTableActionButton>
         <ProTableActionButton url="#/syp">详情</ProTableActionButton>
         <ProTableActionButton>线下已售</ProTableActionButton>
@@ -46,7 +44,6 @@
 
 <script setup lang="ts">
   import { doTodoDelete } from '@/api'
-  import { PD } from '@/stores'
   import type { Todo } from '@/types'
 
   import { useTodoAddedOrUpdate } from './useTodoAddedOrUpdate'

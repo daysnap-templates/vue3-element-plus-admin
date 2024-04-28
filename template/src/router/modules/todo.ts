@@ -1,7 +1,6 @@
 import { RouterView } from 'vue-router'
 
 import { LayoutView } from '@/layout'
-import { PD } from '@/stores'
 
 import { defineRoutes } from '../defineRoutes'
 
@@ -18,7 +17,7 @@ export default defineRoutes([
         path: '/todo/list',
         name: 'TodoListView',
         component: () => import('@/views/todo/todo-list/TodoListView.vue'),
-        meta: { title: 'TODO列表', icon: 'HelpFilled', pd: PD.todo.list },
+        meta: { title: 'TODO列表', icon: 'HelpFilled' },
       },
       {
         path: '/todo/list/2',

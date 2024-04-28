@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-  import Hamburger from './Hamburger.vue'
   import BreadCrumb from './Breadcrumb.vue'
+  import Hamburger from './Hamburger.vue'
   import ScreenFull from './ScreenFull.vue'
   import UserBox from './UserBox.vue'
 </script>

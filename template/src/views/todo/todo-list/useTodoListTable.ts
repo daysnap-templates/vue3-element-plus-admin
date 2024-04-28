@@ -119,8 +119,8 @@ export function useTodoListTable() {
       },
     },
     async ([current, length], query) => {
-      const { dataList, count } = await reqTodoList({ current, length, ...query })
-      return [dataList, count]
+      const { data, total } = await reqTodoList({ current, length, ...query })
+      return [data, total]
     },
   )
 }

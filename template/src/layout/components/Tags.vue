@@ -29,8 +29,9 @@
 </template>
 
 <script setup lang="ts">
-  import { useVisitedTags } from '@/layout/hooks'
   import type { RouteLocationNormalizedLoaded } from 'vue-router'
+
+  import { useVisitedTags } from '@/layout/hooks'
 
   const [visitedTags, handleTabChange] = useVisitedTags()
 

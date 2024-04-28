@@ -49,9 +49,11 @@
 
 <script setup lang="ts">
   import { sleep } from '@daysnap/utils'
-  import { useForm, useWithLoading } from '@/hooks'
-  import { accountInfoStorage } from '@/utils'
+  import { useAsyncTask } from '@daysnap/vue-use'
+
+  import { useForm } from '@/hooks'
   import { metadata } from '@/metadata'
+  import { accountInfoStorage } from '@/utils'
 
   const [formInstance, objForm, objFormRules] = useForm(
     {
@@ -67,17 +69,19 @@
   )
 
   const router = useRouter()
-  const [loading, handleSubmit] = useWithLoading(async () => {
-    if (!formInstance.value) {
-      return
-    }
-    await formInstance.value.validate().throw()
-    await sleep(2000)
-    const { isRemember } = objForm
-    accountInfoStorage.setItem(isRemember ? objForm : { isRemember })
-    router.replace('/')
-    ElMessage.success(`登录成功`)
-  })
+  const { loading, trigger: handleSubmit } = useAsyncTask(
+    async () => {
+      await formInstance.value.validate().throw()
+      await sleep(2000)
+      const { isRemember } = objForm
+      accountInfoStorage.setItem(isRemember ? objForm : { isRemember })
+      router.replace('/')
+      ElMessage.success(`登录成功`)
+    },
+    {
+      throwError: true,
+    },
+  )
 </script>
 
 <style lang="scss" scoped>
