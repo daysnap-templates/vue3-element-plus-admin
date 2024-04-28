@@ -1,7 +1,9 @@
 <template>
   <ElDropdown class="layout-user-box" trigger="hover">
     <div class="layout-user-content">
-      <img src="@/assets/img/avatar.png" alt="头像" />
+      <ElIcon>
+        <User />
+      </ElIcon>
       <span>你好你好</span>
       <ElIcon>
         <CaretBottom />

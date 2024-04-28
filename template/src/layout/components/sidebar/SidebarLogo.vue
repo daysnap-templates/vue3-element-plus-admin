@@ -6,7 +6,7 @@
         <span>{{ metadata.title }}</span>
       </RouterLink>
       <RouterLink class="is-expand" key="expand" v-else to="/">
-        <img src="src/assets/img/logo.png" alt="logo" />
+        <img src="@/assets/img/logo.png" alt="logo" />
         <span>{{ metadata.title }}</span>
       </RouterLink>
     </Transition>
