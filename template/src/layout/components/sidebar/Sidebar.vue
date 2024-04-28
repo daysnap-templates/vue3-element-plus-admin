@@ -88,7 +88,7 @@
       .el-sub-menu {
         margin-top: j(4);
         &.is-active {
-          .el-sub-menu__title {
+          > .el-sub-menu__title {
             font-weight: 500;
             color: $color-primary;
           }
@@ -101,10 +101,15 @@
           background-color: var(--el-menu-hover-bg-color);
         }
       }
+      &.el-menu--vertical:not(.el-menu--collapse):not(.el-menu--popup-container) {
+        .el-menu-item {
+          padding-left: var(--el-menu-level-padding);
+        }
+      }
       .el-sub-menu {
         .el-sub-menu__title,
         .el-menu-item {
-          padding-left: calc(var(--el-menu-level-padding));
+          padding-left: var(--el-menu-level-padding);
         }
       }
       &.el-menu--collapse {

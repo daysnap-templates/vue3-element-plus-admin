@@ -28,6 +28,5 @@ export const loadAsyncRoutes = async () => {
   data.forEach((item) => router.addRoute(item))
   router.options.routes = [...router.options.routes, ...data]
 
-  console.log('router.options.routes => ', router.options.routes)
   isLoadAsyncRoutesFlag = true
 }
