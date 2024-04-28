@@ -3,7 +3,7 @@
     <template v-if="computedOneShowChild">
       <SidebarLink :to="resolvePath(computedOneShowChild.path)" v-if="computedOneShowChild.meta">
         <ElMenuItem :index="resolvePath(computedOneShowChild.path)">
-          <SidebarIcon
+          <ProIcon
             v-if="computedOneShowChild.meta.icon || item?.meta?.icon"
             :icon="computedOneShowChild.meta.icon || item?.meta?.icon"
           />
@@ -15,7 +15,7 @@
     </template>
     <ElSubMenu v-else :index="resolvePath(item.path)">
       <template #title v-if="item.meta">
-        <SidebarIcon v-if="item.meta.icon" :icon="item.meta.icon" />
+        <ProIcon v-if="item.meta.icon" :icon="item.meta.icon" />
         <span>{{ item.meta.title }}</span>
       </template>
       <SidebarCell
@@ -33,7 +33,6 @@
 
   import { isExternal, resolve } from '@/layout/utils'
 
-  import SidebarIcon from './SidebarIcon.vue'
   import SidebarLink from './SidebarLink.vue'
 
   const props = defineProps<{

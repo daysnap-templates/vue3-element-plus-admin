@@ -9,6 +9,7 @@
         :unique-opened="false"
         :collapse-transition="false"
         :default-active="computedActiveMenu"
+        @select="handleSelect"
       >
         <SidebarCell
           v-for="route in routes"
@@ -40,10 +41,15 @@
     },
   )
 
+  const selectPath = ref('')
+  const handleSelect = (path: string) => {
+    selectPath.value = path
+    nextTick(() => (selectPath.value = ''))
+  }
+
   const computedActiveMenu = computed(() => {
-    const route = useRoute()
     const { meta, path } = route
-    return (meta?.activeMenu ?? path) as string
+    return selectPath.value || ((meta?.activePath ?? path) as string)
   })
 </script>
 

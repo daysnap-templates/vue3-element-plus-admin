@@ -35,7 +35,7 @@
           />
         </ElFormItem>
         <ElFormItem prop="password">
-          <el-checkbox v-model="objForm.isRemember" label="记住密码" :disabled="loading" />
+          <ElCheckbox v-model="objForm.isRemember" label="记住密码" :disabled="loading" />
         </ElFormItem>
         <ElFormItem>
           <ElButton class="form-button" type="primary" :loading="loading" @click="handleSubmit">
