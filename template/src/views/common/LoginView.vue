@@ -14,9 +14,9 @@
         :rules="objFormRules"
         @submit="handleSubmit"
       >
-        <ElFormItem prop="account">
+        <ElFormItem prop="username">
           <ElInput
-            v-model="objForm.account"
+            v-model="objForm.username"
             prefix-icon="User"
             :disabled="loading"
             clearable
@@ -48,32 +48,35 @@
 </template>
 
 <script setup lang="ts">
-  import { sleep } from '@daysnap/utils'
   import { useAsyncTask } from '@daysnap/vue-use'
 
+  import { doUserLogin } from '@/api'
   import { useForm } from '@/hooks'
   import { metadata } from '@/metadata'
+  import { useUserinfoStore } from '@/stores'
   import { accountInfoStorage } from '@/utils'
 
   const [formInstance, objForm, objFormRules] = useForm(
     {
-      account: '',
+      username: '',
       password: '',
       isRemember: false,
       ...accountInfoStorage.getItem({}),
     },
     {
-      account: [{ required: true, message: '请填写账号', trigger: 'blur' }],
+      username: [{ required: true, message: '请填写账号', trigger: 'blur' }],
       password: [{ required: true, message: '请填写密码', trigger: 'blur' }],
     },
   )
 
+  const { setUserinfo } = useUserinfoStore()
   const router = useRouter()
   const { loading, trigger: handleSubmit } = useAsyncTask(
     async () => {
       await formInstance.value.validate().throw()
-      await sleep(2000)
-      const { isRemember } = objForm
+      const { isRemember, username, password } = objForm
+      const userinfo = await doUserLogin({ username, password })
+      setUserinfo({ ...userinfo, username })
       accountInfoStorage.setItem(isRemember ? objForm : { isRemember })
       router.replace('/')
       ElMessage.success(`登录成功`)
