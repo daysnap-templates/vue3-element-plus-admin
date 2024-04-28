@@ -40,8 +40,8 @@
     padding: 0 15px;
     span {
       @extend %twno;
+      margin: 0 j(4);
       max-width: 60px;
-      margin-right: 5px;
     }
     img {
       width: 32px;

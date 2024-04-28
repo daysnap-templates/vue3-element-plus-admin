@@ -30,6 +30,7 @@
     @extend %pr;
     @extend %oh;
     height: var(--ly-navbar-height);
+    background-color: $color-primary;
     img {
       width: 30px;
       height: 30px;
@@ -42,7 +43,7 @@
       @extend %pr;
       @extend %w100;
       @extend %wsn;
-      @extend %c3;
+      @extend %cfff;
       font-size: 14px;
       font-weight: 600;
 

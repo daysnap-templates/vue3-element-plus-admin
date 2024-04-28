@@ -117,7 +117,7 @@
     @extend %r0;
     z-index: 9;
     background-color: #fff;
-    box-shadow: 0 1px 4px rgb(0, 21, 41, 0.08);
+    box-shadow: 0 1px 1px 0 rgb(0, 21, 41, 0.08);
   }
   .layout-content {
     @extend %bsb;

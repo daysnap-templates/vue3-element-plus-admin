@@ -75,10 +75,11 @@
     --el-menu-sub-item-height: 40px;
 
     --el-menu-base-level-padding: 8px;
-    --el-menu-level-padding: 18px;
+    --el-menu-level-padding: 12px;
     --el-menu-text-color: #4e5969;
 
-    --el-menu-icon-margin-right: 6px;
+    --el-menu-icon-margin-right: 10px;
+    --el-menu-icon-width: 20px;
 
     :deep {
       .el-icon {
@@ -103,11 +104,7 @@
       .el-sub-menu {
         .el-sub-menu__title,
         .el-menu-item {
-          padding-left: calc(
-            var(--el-menu-icon-width) + var(--el-menu-level) * var(--el-menu-level-padding) - var(
-                --el-menu-icon-margin-right
-              )
-          );
+          padding-left: calc(var(--el-menu-level-padding));
         }
       }
       &.el-menu--collapse {
