@@ -1,4 +1,5 @@
 import { formatMessage, isFunction } from '@daysnap/utils'
+
 import { excludeMessage } from '@/utils'
 
 type ToastCallback = ((err: unknown, message: string) => boolean | void) | boolean

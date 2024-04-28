@@ -1,28 +1,50 @@
 <template>
   <div class="pro-table">
     <ProQueryForm
-      v-if="queryMetadata"
+      v-if="hasQuery"
       :metadata="queryMetadata"
       :loading="status.loading"
       @query="handleQuery"
     />
 
-    <ProTableList v-bind="status" :data="data" @request="reqTableList">
+    <ProTableList
+      v-bind="status"
+      :data="data"
+      :has-pagination="hasPagination"
+      :height="height"
+      @request="reqTableList"
+    >
       <template #actions>
-        <slot name="actions"> </slot>
+        <slot name="actions" :data="data"> </slot>
       </template>
-      <slot></slot>
+      <template #table="scope">
+        <slot name="table" :data="scope.data"></slot>
+      </template>
+
+      <slot :data="data"></slot>
     </ProTableList>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { useTablePaging } from '@/hooks'
-  import { filterEmptyValue } from '@daysnap/utils'
   import { banana } from '@daysnap/banana'
+  import { filterEmptyValue } from '@daysnap/utils'
+
+  import { usePermissionStore } from '@/stores'
+
   import { proTableProps } from './types'
+  import { useProTablePaging, type UseProTablePagingParams } from './useProTablePaging'
 
   const props = defineProps(proTableProps)
+  const { has } = usePermissionStore()
+
+  const hasQuery = computed(() => {
+    const { pd } = props
+
+    const permission = pd ? has(pd) : true
+
+    return permission && !!Object.keys(props.queryMetadata).length
+  })
 
   // eslint-disable-next-line vue/no-setup-props-destructure
   const query = ref(filterEmptyValue(banana.extract(props.queryMetadata), true))
@@ -32,17 +54,17 @@
     reqTableList(1)
   }
 
-  const [status, data, reqTableList] = useTablePaging(
+  const [status, data, reqTableList] = useProTablePaging(
     (state) => {
       return props.request!(state, query.value)
     },
     {
-      immediate: true,
+      immediate: props.immediate,
     },
   )
 
   defineExpose({
-    reload: () => reqTableList(1),
+    reload: (options: UseProTablePagingParams = {}) => reqTableList(options),
   })
 </script>
 
@@ -51,7 +73,8 @@
   .pro-table {
     @extend %df;
     @extend %fdc;
-    min-height: calc(100vh - var(--ds-navbar-height) - 37px - 32px);
+    @extend %w100;
+    min-height: calc(100vh - var(--ly-topbar-height) - var(--ly-navbar-height) - 16px - 16px);
     :deep {
       .pro-table-list {
         @extend %df1;
@@ -62,23 +85,27 @@
       .el-scrollbar__view {
         display: inline-flex !important;
       }
-      .el-scrollbar__view,
-      .el-scrollbar__wrap,
-      .el-table__body-wrapper,
-      .el-scrollbar,
-      .pro-table-content,
-      .el-table,
-      .el-table__inner-wrapper {
-        @extend %df1;
-        @extend %df;
-        @extend %fdc;
-      }
-      .el-table__empty-block {
-        @extend %df;
-        @extend %fdc;
-        @extend %df1;
-        @extend %aic;
-        @extend %jcc;
+    }
+    &.is-fullscreen {
+      :deep {
+        .el-scrollbar__view,
+        .el-scrollbar__wrap,
+        .el-table__body-wrapper,
+        .el-scrollbar,
+        .pro-table-content,
+        .el-table,
+        .el-table__inner-wrapper {
+          @extend %df1;
+          @extend %df;
+          @extend %fdc;
+        }
+        .el-table__empty-block {
+          @extend %df;
+          @extend %fdc;
+          @extend %df1;
+          @extend %aic;
+          @extend %jcc;
+        }
       }
     }
   }

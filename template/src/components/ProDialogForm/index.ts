@@ -1,7 +1,7 @@
 import Component from './ProDialogForm.vue'
 
-export * from './hooks'
 export * from './types'
+export * from './useProDialogForm'
 
 export const ProDialogForm = Component
 export default ProDialogForm

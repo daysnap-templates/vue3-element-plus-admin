@@ -1,5 +1,6 @@
 import type { Plugin } from 'vue'
-import router from '@/router'
+
+import { router } from '@/router'
 
 // docs vue-router https://router.vuejs.org/zh/
 export default {

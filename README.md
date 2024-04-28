@@ -28,6 +28,15 @@ dsc -h
 # 初始化项目
 npm init vue@latest
 
+# 安装依赖
+npm install
+
+# 格式化
+npm run format
+
+# 开发
+npm run dev
+
 # 安装依赖包
 npm install element-plus -S
 

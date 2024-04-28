@@ -1,23 +1,38 @@
 <template>
   <div class="pro-table-list">
-    <div class="pro-table-header">
-      <h2>{{ title }}</h2>
+    <div v-if="hasRefresh" class="pro-table-header">
+      <div class="pro-table-title">
+        <slot name="title"></slot>
+      </div>
       <div class="pro-table-actions">
-        <ElButton plain icon="RefreshRight" :loading="loading" @click="$emit('request', {})">
+        <ElButton
+          plain
+          icon="RefreshRight"
+          :loading="loading"
+          v-if="hasRefresh"
+          @click="$emit('request', {})"
+        >
           刷新
         </ElButton>
         <slot name="actions"></slot>
       </div>
     </div>
     <div class="pro-table-content" v-loading="loading" element-loading-text="加载中">
-      <ElTable width="100%" stripe table-layout="fixed" :data="data">
-        <slot></slot>
-      </ElTable>
+      <slot name="table" :data="data">
+        <ElTable width="100%" table-layout="fixed" :data="data" :height="height">
+          <template #empty>
+            <ElEmpty description="暂无数据" />
+          </template>
+          <slot></slot>
+        </ElTable>
+      </slot>
     </div>
     <ElPagination
+      v-if="hasPagination"
       class="pro-table-pagination"
-      layout="total, sizes, prev, pager, next, jumper"
+      layout="total, prev, pager, next, sizes, jumper"
       background
+      small
       :current-page="pageIndex"
       :page-size="pageSize"
       :total="total"
@@ -31,9 +46,10 @@
   defineEmits(['request'])
 
   defineProps({
-    title: {
-      type: String,
-      default: '列表',
+    height: [String, Number],
+    hasPagination: {
+      type: Boolean,
+      default: true,
     },
     total: {
       type: Number,
@@ -53,18 +69,45 @@
       type: Boolean,
       default: false,
     },
+    hasRefresh: {
+      type: Boolean,
+      default: true,
+    },
   })
 </script>
 <style lang="scss" scoped>
   @import '@/assets/scss/define.scss';
   .pro-table-list {
-    border-radius: 4px;
+    @extend %pr;
+    @extend %w100;
+    z-index: 1;
     background-color: #fff;
-    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.05);
     padding: 16px 0;
     :deep {
       .el-table {
+        width: 100%;
         --el-table-bg-color: transparent;
+      }
+      .el-table__header {
+        --el-table-header-bg-color: #f2f3f5;
+        --el-table-header-text-color: #1d2129;
+      }
+      .el-table__body-wrapper {
+        font-size: j(12);
+        .el-table__cell {
+          padding: j(16) 0;
+        }
+        .cell {
+          line-height: 1.4;
+        }
+        ul {
+          li {
+            margin-top: j(4);
+            &:first-child {
+              margin-top: 0;
+            }
+          }
+        }
       }
     }
   }
@@ -73,6 +116,7 @@
     @extend %aic;
     @extend %fww;
     padding: 0 16px;
+    margin-bottom: 16px;
     h2 {
       font-size: 16px;
     }
@@ -82,11 +126,10 @@
     margin-left: auto;
   }
   .pro-table-content {
-    margin-top: 10px;
     padding: 0 16px;
   }
   .pro-table-pagination {
-    @extend %jcc;
+    @extend %jce;
     margin-top: 24px;
     padding: 0 16px;
   }

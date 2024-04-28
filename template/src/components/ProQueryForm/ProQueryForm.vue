@@ -1,64 +1,96 @@
 <template>
   <div class="pro-query-form">
-    <div class="form-cell" v-for="(item, key) in computedFields" :key="key" :class="[item.is]">
-      <span class="form-cell-label" v-if="item.label">{{ item.label }}</span>
-      <ElInput
-        v-if="item.is === 'form-input'"
-        v-model="item.value"
-        placeholder="请填写"
-        clearable
-        v-bind="item.props"
-      />
-      <ElSelect
-        v-else-if="item.is === 'form-select'"
-        v-model="item.value"
-        placeholder="请选择"
-        clearable
-        v-bind="item.props"
-      >
-        <ElOption
-          v-for="(option, index) in item.options"
-          v-bind="option.props"
-          :key="index"
-          :label="option.label"
-          :value="option.value"
-        />
-      </ElSelect>
-      <template v-else-if="item.is === 'form-radio'">
-        <ElRadioGroup v-model="item.value">
-          <ElRadio
-            v-for="(option, index) in item.options"
-            v-bind="option.props"
-            :key="index"
-            :label="option.value"
-          >
-            {{ option.label }}
-          </ElRadio>
-        </ElRadioGroup>
-      </template>
-      <template v-else-if="item.is === 'form-checkbox'">
-        <ElCheckboxGroup v-model="item.value" v-bind="item.props">
-          <ElCheckbox
-            v-for="(option, index) in item.options"
-            v-bind="option.props"
-            :key="index"
-            :label="option.value"
-          >
-            {{ option.label }}
-          </ElCheckbox>
-        </ElCheckboxGroup>
-      </template>
-      <ElDatePicker
-        v-else-if="item.is === 'form-date-picker'"
-        v-model="item.value"
-        type="date"
-        placeholder="请选择"
-        clearable
-        v-bind="item.props"
-      />
+    <div class="pro-query-form-content">
+      <ElForm :model="formInline" label-position="right" label-width="120px">
+        <ElRow :gutter="16">
+          <ElCol v-for="(item, key) in computedFields" :key="key" :span="item.span ?? 8">
+            <ElFormItem :label="item.label">
+              <ElInput
+                v-if="item.is === 'form-input'"
+                v-model="item.value"
+                placeholder="请填写"
+                clearable
+                v-bind="item.props"
+              />
+              <ElSelect
+                v-else-if="item.is === 'form-select'"
+                v-model="item.value"
+                placeholder="请选择"
+                clearable
+                filterable
+                v-bind="item.props"
+              >
+                <ElOption
+                  v-for="(option, index) in item.options"
+                  v-bind="option.props"
+                  :key="index"
+                  :label="option[item.labelKey || 'label'] || option"
+                  :value="option[item.valueKey || 'value'] ?? option"
+                />
+              </ElSelect>
+              <ElRadioGroup v-else-if="item.is === 'form-radio'" v-model="item.value">
+                <ElRadio
+                  v-for="(option, index) in item.options"
+                  v-bind="option.props"
+                  :key="index"
+                  :value="option[item.valueKey || 'value'] ?? option"
+                >
+                  {{ option[item.labelKey || 'label'] || option }}
+                </ElRadio>
+              </ElRadioGroup>
+              <ElCheckboxGroup
+                v-else-if="item.is === 'form-checkbox'"
+                v-model="item.value"
+                v-bind="item.props"
+              >
+                <ElCheckbox
+                  v-for="(option, index) in item.options"
+                  v-bind="option.props"
+                  :key="index"
+                  :value="option[item.valueKey || 'value'] ?? option"
+                >
+                  {{ option[item.labelKey || 'label'] || option }}
+                </ElCheckbox>
+              </ElCheckboxGroup>
+              <ElDatePicker
+                v-else-if="item.is === 'form-date-picker'"
+                v-model="item.value"
+                type="date"
+                placeholder="请选择"
+                clearable
+                :value-format="datePickerValueFormat[item.props?.type ?? 'date']"
+                start-placeholder="请选择"
+                end-placeholder="请选择"
+                v-bind="item.props"
+              />
+              <ElTreeSelect
+                v-else-if="item.is === 'form-tree-select'"
+                v-model="item.value"
+                clearable
+                v-bind="item.props"
+                :data="item.options"
+              />
+              <ElCascader
+                v-else-if="item.is === 'form-cascader'"
+                v-model="item.value"
+                clearable
+                v-bind="item.props"
+                :validate-event="false"
+              />
+              <Component
+                v-else-if="item.is"
+                v-model="item.value"
+                v-bind="{ ...item, ...item.props }"
+                :hidden="false"
+                :is="item.is"
+              />
+            </ElFormItem>
+          </ElCol>
+        </ElRow>
+      </ElForm>
     </div>
 
-    <div class="form-cell">
+    <div class="pro-query-form-actions">
       <ElButton type="primary" icon="Search" :loading="loading" @click="handleQuery">
         查询
       </ElButton>
@@ -70,7 +102,14 @@
 <script setup lang="ts">
   import { banana } from '@daysnap/banana'
   import { filterEmptyValue, isArray, isObject, isUndefined } from '@daysnap/utils'
+
   import { proQueryFormProps } from './types'
+
+  const formInline = reactive({
+    user: '',
+    region: '',
+    date: '',
+  })
 
   const emits = defineEmits(['query', 'reset'])
   const props = defineProps(proQueryFormProps)
@@ -85,6 +124,13 @@
   const handleQuery = () => {
     const value = filterEmptyValue(banana.extract(computedFields.value), true)
     emits('query', value)
+  }
+
+  // YYYY-MM-DD HH:mm:ss
+  const datePickerValueFormat: Record<string, string> = {
+    date: 'YYYY-MM-DD',
+    daterange: 'YYYY-MM-DD',
+    datetimerange: 'YYYY-MM-DD HH:mm:ss',
   }
 
   // 重置
@@ -113,37 +159,61 @@
   @import '@/assets/scss/define.scss';
   .pro-query-form {
     @extend %df;
-    @extend %fww;
-    padding: 6px 16px 16px;
-    margin-bottom: 16px;
-    border-radius: 4px;
+    @extend %pr;
+    padding: j(16);
     background-color: #fff;
-    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.05);
+    &::after {
+      @extend %pa;
+      @extend %b0;
+      right: j(16);
+      left: j(16);
+      height: 1px;
+      content: '';
+      background-color: #e5e6eb;
+    }
     :deep {
-      .el-input {
-        --el-input-width: 220px;
-        --el-date-editor-width: 220px;
+      .el-date-editor {
+        --el-date-editor-width: 100%;
+      }
+      .el-form-item__label {
+        @extend %df;
+        @extend %aic;
+        @extend %tar;
+        line-height: 1.1;
+      }
+      .el-form-item {
+        margin-bottom: 0;
+      }
+      .el-col {
+        margin-top: j(16);
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3) {
+          margin-top: 0;
+        }
+      }
+      .el-cascader {
+        @extend %w100;
       }
     }
   }
-  .form-cell {
-    @extend %df;
-    @extend %aic;
-    margin-top: 10px;
-    margin-right: 16px;
-    &:last-child {
-      margin-right: 0;
-    }
-    &.form-checkbox {
-      padding: 0 16px;
-    }
-    &.form-radio {
-      padding: 0 16px;
-    }
+
+  .pro-query-form-content {
+    @extend %df1;
+    padding-right: j(16);
+    border-right: 1px solid #e5e6eb;
   }
-  .form-cell-label {
-    @extend %c3;
-    margin-right: 10px;
-    font-size: 14px;
+
+  .pro-query-form-actions {
+    @extend %df;
+    @extend %fdc;
+    @extend %aic;
+    margin-left: j(16);
+    :deep {
+      .el-button + .el-button {
+        margin-left: 0;
+        margin-top: j(10);
+      }
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 import { isNumber, isString } from '@daysnap/utils'
 
-export interface UseTablePagingStatus {
+export interface UseProTablePagingStatus {
   pageIndex: number
   pageSize: number
   total: number
@@ -8,22 +8,24 @@ export interface UseTablePagingStatus {
   error: string
 }
 
-export interface UseTablePagingTask<T = any> {
+export interface UseProTablePagingTask<T = any> {
   (state: [number, number]): Promise<[T[], number]>
 }
 
-export interface UseTablePagingOptions {
-  initialStatus?: Partial<UseTablePagingStatus>
+export interface UseProTablePagingOptions {
+  initialStatus?: Partial<UseProTablePagingStatus>
   immediate?: boolean
 }
 
-export function useTablePaging<T = any>(
-  task: UseTablePagingTask<T>,
-  options: UseTablePagingOptions = {},
+export type UseProTablePagingParams = { pageIndex?: number; pageSize?: number } | number
+
+export function useProTablePaging<T = any>(
+  task: UseProTablePagingTask<T>,
+  options: UseProTablePagingOptions = {},
 ) {
   const { initialStatus, immediate } = options
 
-  const status = reactive<UseTablePagingStatus>(
+  const status = reactive<UseProTablePagingStatus>(
     Object.assign(
       {
         pageIndex: 1,
@@ -39,7 +41,7 @@ export function useTablePaging<T = any>(
   // https://github.com/vuejs/core/issues/2136
   const list = ref([]) as Ref<T[]>
 
-  const trigger = (params: { pageIndex?: number; pageSize?: number } | number = {}) => {
+  const trigger = (params: UseProTablePagingParams = {}) => {
     if (isNumber(params)) {
       params = { pageIndex: params }
     }

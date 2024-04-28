@@ -1,4 +1,5 @@
 import type { Plugin } from 'vue'
+
 import { pinia } from '@/stores'
 
 // pinia docs https://pinia.vuejs.org/zh/

@@ -1,6 +1,14 @@
 import type { InternalAxiosRequestConfig } from 'axios'
 
+import { __DEV__ } from '@/utils'
+
 export const log = (config: InternalAxiosRequestConfig, ...args: any[]) => {
-  const { url = '', baseURL = '', method } = config
-  console.log(`${url?.startsWith(`http`) ? url : baseURL + url}`, `[${method}]`, ...args)
+  if (__DEV__) {
+    const { url = '', baseURL = '', method, adapterName } = config
+    console.log(
+      `${url?.startsWith(`http`) ? url : baseURL + url}`,
+      `[${adapterName}] [${method}]`,
+      ...args,
+    )
+  }
 }

@@ -1,9 +1,12 @@
-import type { Plugin, AppConfig } from 'vue'
-import { __DEV__, excludeMessage } from '@/utils'
 import { formatMessage } from '@daysnap/utils'
+import type { AppConfig, Plugin } from 'vue'
+
+import { __DEV__, excludeMessage, NProgress } from '@/utils'
 
 // global error handler
 const errorHandler: AppConfig['errorHandler'] = (err) => {
+  NProgress.done()
+
   const message = formatMessage(err)
   if (message && !excludeMessage(message)) {
     ElMessage({
