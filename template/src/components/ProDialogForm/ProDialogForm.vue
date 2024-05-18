@@ -156,7 +156,7 @@
   import banana from '@daysnap/banana'
   import { getRandom, isFunction } from '@daysnap/utils'
   import { useAsyncTask, useVisible } from '@daysnap/vue-use'
-  import type { ElDialog, FormInstance } from 'element-plus'
+  import type { FormInstance } from 'element-plus'
 
   import { type ProDialogFormMetadata, type ProDialogFormProps, proDialogFormProps } from './types'
 
