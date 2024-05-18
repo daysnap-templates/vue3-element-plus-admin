@@ -74,17 +74,20 @@
     @extend %df;
     @extend %fdc;
     @extend %w100;
-    min-height: calc(100vh - var(--ly-topbar-height) - var(--ly-navbar-height) - 16px - 16px);
+    min-height: calc(100vh - var(--ly-navbar-height) - 37px - 16px - 16px);
     :deep {
+      .pro-query-form {
+        margin-bottom: j(16);
+      }
       .pro-table-list {
         @extend %df1;
         @extend %df;
         @extend %fdc;
       }
       // 解决 table 希望尽量撑满一屏
-      .el-scrollbar__view {
-        display: inline-flex !important;
-      }
+      // .el-scrollbar__view {
+      //   display: inline-flex !important;
+      // }
     }
     &.is-fullscreen {
       :deep {
