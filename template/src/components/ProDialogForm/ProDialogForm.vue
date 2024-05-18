@@ -1,9 +1,12 @@
 <template>
   <ElDialog
-    class="pro-dialog-form"
     v-model="visible"
+    class="pro-dialog-form"
+    :class="[id]"
+    ref="containerRef"
     :title="computedProps.title"
     destroy-on-close
+    append-to-body
     :close-on-click-modal="false"
     :style="computedProps.style"
   >
@@ -151,9 +154,9 @@
 
 <script setup lang="ts">
   import banana from '@daysnap/banana'
-  import { isFunction } from '@daysnap/utils'
+  import { getRandom, isFunction } from '@daysnap/utils'
   import { useAsyncTask, useVisible } from '@daysnap/vue-use'
-  import type { FormInstance } from 'element-plus'
+  import type { ElDialog, FormInstance } from 'element-plus'
 
   import { type ProDialogFormMetadata, type ProDialogFormProps, proDialogFormProps } from './types'
 
@@ -205,12 +208,13 @@
     },
   })
 
+  const id = `id_${getRandom(10)}`
   watch(visible, (v) => {
     if (v) {
       nextTick(() => {
-        const els = document.querySelectorAll('.el-overlay-dialog')
+        const els = document.querySelectorAll(`.${id}`)
         if (els.length) {
-          els.forEach((el) => (el.scrollTop = 0))
+          els.forEach((el) => (el.parentElement!.scrollTop = 0))
         }
       })
     }
@@ -287,6 +291,16 @@
     .pro-table-list,
     .pro-table-content {
       padding: 0 !important;
+    }
+    .pro-query-form {
+      .el-form {
+        .el-form-item {
+          display: flex;
+        }
+        .el-form-item__label {
+          margin-bottom: 0;
+        }
+      }
     }
   }
   @media (max-width: 500px) {
